@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <script src="paper-full.min.js"></script>
+    <title>2</title>
+  </head>
+  <body>
+    <script type="text/paperscript" canvas="canvas-1">
+
+      var y = view.size.height / 2;
+      var width = view.size.width;
+      var vector = new Point({
+            angle: 45,
+            length: width / 5
+            });
+      var offset = width / 30;
+
+      for (var i = 0; i < 40; i+=3) {
+        var path = new Path();
+        vector.length += i;
+        path.segments = [
+          [[offset, y], null, vector.rotate(-90-i)],
+          [[width / 2, y], vector.rotate(-180+i), vector.rotate(i)],
+          [[width - offset, y], vector.rotate(90-i), null]
+        ];
+        path.strokeColor = '#0074d9';
+      }
+
+    </script>
+
+    <canvas resize="true" id="canvas-1"></canvas>
+
+  </body>
+</html>
