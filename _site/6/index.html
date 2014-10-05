@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <script src="paper-full.min.js"></script>
+    <title>6</title>
+    <style>* {margin: 0;}</style>
+  </head>
+  <body>
+    <script type="text/paperscript" canvas="canvas-1">
+      view.element.style.backgroundColor = '#111111';
+
+      var rectSize = view.size.width * 0.3;
+      var cornerRadius = rectSize * 0.1;
+
+      var color = new Color('#0074d9');
+      var rect = new Rectangle(new Point(0, 0), new Size(rectSize, rectSize));
+      var cornerSize = new Size(cornerRadius, cornerRadius);
+      var shape = new Shape.Rectangle(rect, cornerSize);
+      shape.strokeColor = color;
+
+      for (i = 0; i < 360; i += 10) {
+          var newShape = shape.clone();
+          newShape.strokeColor.hue += i;
+          newShape.rotate(i, [rectSize/4, rectSize/4]);
+      }
+
+      shape.remove();
+      project.activeLayer.position = view.center;
+    </script>
+
+    <canvas resize="true" id="canvas-1"></canvas>
+
+  </body>
+</html>

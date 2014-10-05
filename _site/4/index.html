@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <script src="paper-full.min.js"></script>
+    <title>4</title>
+    <style>* {margin: 0;}</style>
+  </head>
+  <body>
+    <script type="text/paperscript" canvas="canvas-1">
+
+      view.element.style.backgroundColor = '#111111';
+
+      var color = new Color('#0074d9');
+      var strokeWidth = view.size.width * 0.02;
+
+      var c = view.size.width / 3;
+      var a = c/2;
+      var b = Math.sin(60 * Math.PI / 180) * c;
+
+      path = new Path.Line([0, b], [a, 0]);
+      var color1 = color.clone();
+      var color2 = color.clone();
+      color2.hue += 60;
+      var gradient = new Gradient([color1, color2]);
+      path.strokeColor = new Color(gradient, [0, b], [a, 0]);
+      path.strokeWidth = strokeWidth;
+      path.strokeCap = 'round';
+
+      path = new Path.Line([a, 0], [a+c, 0]);
+      var color1 = color.clone();
+      var color2 = color.clone();
+      color1.hue += 60;
+      color2.hue += 120;
+      var gradient = new Gradient([color1, color2]);
+      path.strokeColor = new Color(gradient, [a, 0], [a+c, 0]);
+      path.strokeWidth = strokeWidth;
+      path.strokeCap = 'round';
+
+      path = new Path.Line([a+c, 0], [2*c, b]);
+      var color1 = color.clone();
+      var color2 = color.clone();
+      color1.hue += 120;
+      color2.hue += 180;
+      var gradient = new Gradient([color1, color2]);
+      path.strokeColor = new Color(gradient, [a+c, 0], [2*c, b]);
+      path.strokeWidth = strokeWidth;
+      path.strokeCap = 'round';
+
+      path = new Path.Line([2*c, b], [a+c, 2*b]);
+      var color1 = color.clone();
+      var color2 = color.clone();
+      color1.hue += 180;
+      color2.hue += 240;
+      var gradient = new Gradient([color1, color2]);
+      path.strokeColor = new Color(gradient, [2*c, b], [a+c, 2*b]);
+      path.strokeWidth = strokeWidth;
+      path.strokeCap = 'round';
+
+      path = new Path.Line([a+c, 2*b], [a, 2*b]);
+      var color1 = color.clone();
+      var color2 = color.clone();
+      color1.hue += 240;
+      color2.hue += 300;
+      var gradient = new Gradient([color1, color2]);
+      path.strokeColor = new Color(gradient, [a+c, 2*b], [a, 2*b]);
+      path.strokeWidth = strokeWidth;
+      path.strokeCap = 'round';
+
+      path = new Path.Line([a, 2*b], [0, b]);
+      var color1 = color.clone();
+      var color2 = color.clone();
+      color1.hue += 300;
+      color2.hue += 360;
+      var gradient = new Gradient([color1, color2]);
+      path.strokeColor = new Color(gradient, [a, 2*b], [0, b]);
+      path.strokeWidth = strokeWidth;
+      path.strokeCap = 'round';
+
+      project.activeLayer.position = view.center;
+    </script>
+
+    <canvas resize="true" id="canvas-1"></canvas>
+
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <script src="paper-full.min.js"></script>
+    <title>1</title>
+  </head>
+  <body>
+    <script type="text/paperscript" canvas="canvas-1">
+
+      var raster = new Raster('starry-night.jpg');
+
+      // Hide the original image
+      raster.visible = false;
+
+      var gridSize = 12;
+
+      // Space the cells by 120%:
+      var spacing = 1.2;
+
+      // As the web is asynchronous, we need to wait for the raster to load
+      // before we can perform any operation on its pixels.
+      raster.on('load', function() {
+        // Resize image to a manageable size
+        raster.size = new Size(50, 32);
+
+        for (var y = 0; y < raster.height; y++) {
+          for(var x = 0; x < raster.width; x++) {
+            // Get the color of the pixel:
+            var color = raster.getPixel(x, y);
+
+            // Create a circle shaped path:
+            var path = new Path.Circle({
+              center: new Point(x, y) * gridSize,
+              radius: gridSize / 2 / spacing
+            });
+
+            // Set the fill color of the path to the color
+            // of the pixel:
+            path.fillColor = color;
+          }
+        }
+
+        // Move the active layer to the center of the view, so all
+        // the created paths in it appear centered.
+        project.activeLayer.position = view.center;
+      });
+
+      // Move the active layer to the center of the view:
+      project.activeLayer.position = view.center;
+
+    </script>
+
+    <canvas resize="true" id="canvas-1"></canvas>
+
+  </body>
+</html>
