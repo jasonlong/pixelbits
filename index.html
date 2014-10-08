@@ -5,7 +5,7 @@ layout: default
 {% for post in site.posts %}
   <div class="post">
     {{ post.content }}
-    <a href="{{post.url}}" class="post-date">{{ post.date | date_to_string }}</a>
+    <a href="{{ site.baseurl }}{{post.url}}" class="post-date">{{ post.date | date_to_string }}</a>
     <p class="post-description">
       {{ post.description }} <a href="#" class="js-show-code">Show code</a>
     </p>
