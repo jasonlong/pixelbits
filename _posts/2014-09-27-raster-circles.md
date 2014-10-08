@@ -1,5 +1,4 @@
 ---
-layout: post
 title: Raster circles
 updated_at: Sep 27, 2014
 

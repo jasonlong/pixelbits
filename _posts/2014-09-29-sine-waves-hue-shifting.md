@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Sine waves with hue shifting
-updated_at: Sep 29, 2014
 
 description: Shifting hues using yesterday's sine wave.
 tags:

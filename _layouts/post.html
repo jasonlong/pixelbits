@@ -4,10 +4,8 @@
   <span class="post-date">{{ page.date | date_to_string }}</span>
   <p class="post-description">{{ page.description }}</p>
 
-  <div class="code">
-    {% highlight javascript %}
-      {{ page.content }}
-    {% endhighlight %}
-  </div>
+  {% highlight javascript %}
+    {{ page.content }}
+  {% endhighlight %}
 </div>
 {% include footer.html %}

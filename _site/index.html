@@ -18,6 +18,473 @@
 
   
   <div class="post">
+    <script type="text/paperscript" canvas="canvas-0008">
+  var columns = 12;
+  var isoSize = view.size.width / columns;
+  var isoWidth = isoSize * Math.sqrt(3) / 2;
+  var row = 0;
+  var lightFalloff = 0.0008;
+
+  for (var y = 0; y <= view.size.height + isoSize; y += isoSize - isoSize / 4) {
+    row++;
+    for (var x = 0; x <= view.size.width + isoWidth; x += isoWidth) {
+
+      var group = new Group();
+      var dx = (row % 2) ? isoWidth / 2 : 0;
+      var hexagon = new Path.RegularPolygon([x-dx,y], 6, isoSize / 2);
+      group.addChild(hexagon);
+
+      for (var i = 0; i < 2; i++) {
+        var path = new Path();
+        for (var j = 0; j < 3; j++) {
+          var index = (i * 2 + j) % hexagon.segments.length;
+          path.add(hexagon.segments[index].clone());
+        }
+        path.add(hexagon.bounds.center);
+        group.addChild(path);
+      }
+
+      var color = "#b10dc9";
+
+      group.children[0].fillColor = color;
+      group.children[1].fillColor = color;
+      group.children[2].fillColor = color;
+      group.children[0].fillColor.brightness *= 0.75 - (y * lightFalloff);
+      group.children[1].fillColor.brightness *= 1 - (y * lightFalloff);
+      group.children[2].fillColor.brightness *= 0.55 - (y * lightFalloff);
+    }
+  }
+</script>
+
+<canvas id="canvas-0008" height="250"></canvas>
+
+    <a href="/2014/10/07/shaded-cubes.html" class="post-date">07 Oct 2014</a>
+    <p class="post-description">
+      Isometric cubes with faux shadows. <a href="#">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0008&quot;</span><span class="o">&gt;</span>
+  <span class="kd">var</span> <span class="nx">columns</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">isoSize</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="nx">columns</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">isoWidth</span> <span class="o">=</span> <span class="nx">isoSize</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">lightFalloff</span> <span class="o">=</span> <span class="mf">0.0008</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="nx">isoSize</span><span class="p">;</span> <span class="nx">y</span> <span class="o">+=</span> <span class="nx">isoSize</span> <span class="o">-</span> <span class="nx">isoSize</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">row</span><span class="o">++</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">isoWidth</span><span class="p">;</span> <span class="nx">x</span> <span class="o">+=</span> <span class="nx">isoWidth</span><span class="p">)</span> <span class="p">{</span>
+
+      <span class="kd">var</span> <span class="nx">group</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Group</span><span class="p">();</span>
+      <span class="kd">var</span> <span class="nx">dx</span> <span class="o">=</span> <span class="p">(</span><span class="nx">row</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">?</span> <span class="nx">isoWidth</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">hexagon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">RegularPolygon</span><span class="p">([</span><span class="nx">x</span><span class="o">-</span><span class="nx">dx</span><span class="p">,</span><span class="nx">y</span><span class="p">],</span> <span class="mi">6</span><span class="p">,</span> <span class="nx">isoSize</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+      <span class="nx">group</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">hexagon</span><span class="p">);</span>
+
+      <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">();</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="p">(</span><span class="nx">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="nx">j</span><span class="p">)</span> <span class="o">%</span> <span class="nx">hexagon</span><span class="p">.</span><span class="nx">segments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+          <span class="nx">path</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">hexagon</span><span class="p">.</span><span class="nx">segments</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">clone</span><span class="p">());</span>
+        <span class="p">}</span>
+        <span class="nx">path</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">hexagon</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">center</span><span class="p">);</span>
+        <span class="nx">group</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
+      <span class="p">}</span>
+
+      <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="s2">&quot;#b10dc9&quot;</span><span class="p">;</span>
+
+      <span class="nx">group</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+      <span class="nx">group</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+      <span class="nx">group</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+      <span class="nx">group</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">brightness</span> <span class="o">*=</span> <span class="mf">0.75</span> <span class="o">-</span> <span class="p">(</span><span class="nx">y</span> <span class="o">*</span> <span class="nx">lightFalloff</span><span class="p">);</span>
+      <span class="nx">group</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">brightness</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="nx">y</span> <span class="o">*</span> <span class="nx">lightFalloff</span><span class="p">);</span>
+      <span class="nx">group</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">brightness</span> <span class="o">*=</span> <span class="mf">0.55</span> <span class="o">-</span> <span class="p">(</span><span class="nx">y</span> <span class="o">*</span> <span class="nx">lightFalloff</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0008&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
+    <script type="text/paperscript" canvas="canvas-0007">
+  var bgColor = "#2f325c";
+  var fgColor = "#405e7d";
+
+  view.element.style.backgroundColor = bgColor;
+
+  var center = new Point(0, 0);
+  var points = 4;
+  var radius1 = view.size.height / 12;
+  var radius2 = view.size.height / 3;
+
+  var star = new Path.Star(center, points, radius1, radius2);
+  star.strokeColor = fgColor;
+  star.rotate(45);
+  var lineH = new Path.Line({
+      from: [0, -radius2],
+      to: [0, radius2],
+      strokeColor: fgColor
+  });
+
+  var lineV = new Path.Line({
+      from: [-radius2, 0],
+      to: [radius2, 0],
+      strokeColor: fgColor
+  });
+
+  var starGroup = new Group();
+  starGroup.addChildren([star, lineH, lineV]);
+
+  // Stars
+  for (i = 0; i < 90; i += 22.5) {
+      var newStar = starGroup.clone();
+      newStar.rotate(i);
+  }
+  starGroup.remove();
+
+  // Circles
+  for (i = radius1; i <= radius2; i += radius1) {
+      var circle = new Path.Circle(new Point(0, 0), i);
+      circle.strokeColor = fgColor;
+  }
+
+  project.activeLayer.position = view.center;
+</script>
+
+<canvas id="canvas-0007" height="250"></canvas>
+
+    <a href="/2014/10/05/geometric-star.html" class="post-date">05 Oct 2014</a>
+    <p class="post-description">
+      Copying and rotating shape groups. <a href="#">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0007&quot;</span><span class="o">&gt;</span>
+  <span class="kd">var</span> <span class="nx">bgColor</span> <span class="o">=</span> <span class="s2">&quot;#2f325c&quot;</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">fgColor</span> <span class="o">=</span> <span class="s2">&quot;#405e7d&quot;</span><span class="p">;</span>
+
+  <span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="nx">bgColor</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">center</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">radius1</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">12</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">radius2</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">star</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Star</span><span class="p">(</span><span class="nx">center</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">radius1</span><span class="p">,</span> <span class="nx">radius2</span><span class="p">);</span>
+  <span class="nx">star</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">fgColor</span><span class="p">;</span>
+  <span class="nx">star</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">45</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">lineH</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">({</span>
+      <span class="nx">from</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="nx">radius2</span><span class="p">],</span>
+      <span class="nx">to</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nx">radius2</span><span class="p">],</span>
+      <span class="nx">strokeColor</span><span class="o">:</span> <span class="nx">fgColor</span>
+  <span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">lineV</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">({</span>
+      <span class="nx">from</span><span class="o">:</span> <span class="p">[</span><span class="o">-</span><span class="nx">radius2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+      <span class="nx">to</span><span class="o">:</span> <span class="p">[</span><span class="nx">radius2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+      <span class="nx">strokeColor</span><span class="o">:</span> <span class="nx">fgColor</span>
+  <span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">starGroup</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Group</span><span class="p">();</span>
+  <span class="nx">starGroup</span><span class="p">.</span><span class="nx">addChildren</span><span class="p">([</span><span class="nx">star</span><span class="p">,</span> <span class="nx">lineH</span><span class="p">,</span> <span class="nx">lineV</span><span class="p">]);</span>
+
+  <span class="c1">// Stars</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">90</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mf">22.5</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">newStar</span> <span class="o">=</span> <span class="nx">starGroup</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+      <span class="nx">newStar</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">starGroup</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+
+  <span class="c1">// Circles</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="nx">radius1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">radius2</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="nx">radius1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">circle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nx">i</span><span class="p">);</span>
+      <span class="nx">circle</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">fgColor</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0007&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
+    <script type="text/paperscript" canvas="canvas-0006">
+  view.element.style.backgroundColor = '#111111';
+
+  var rectSize = view.size.width * 0.3;
+  var cornerRadius = rectSize * 0.1;
+
+  var color = new Color('#0074d9');
+  var rect = new Rectangle(new Point(0, 0), new Size(rectSize, rectSize));
+  var cornerSize = new Size(cornerRadius, cornerRadius);
+  var shape = new Shape.Rectangle(rect, cornerSize);
+  shape.strokeColor = color;
+
+  for (i = 0; i < 360; i += 10) {
+      var newShape = shape.clone();
+      newShape.strokeColor.hue += i;
+      newShape.rotate(i, [rectSize/4, rectSize/4]);
+  }
+
+  shape.remove();
+  project.activeLayer.position = view.center;
+</script>
+
+<canvas id="canvas-0006" height="250"></canvas>
+
+    <a href="/2014/10/04/rainbow-pseudo-spirograph.html" class="post-date">04 Oct 2014</a>
+    <p class="post-description">
+      Pseudo-spirograph made of rotating rounded squares. <a href="#">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0006&quot;</span><span class="o">&gt;</span>
+  <span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;#111111&#39;</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">rectSize</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mf">0.3</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">cornerRadius</span> <span class="o">=</span> <span class="nx">rectSize</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;#0074d9&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="nx">rectSize</span><span class="p">,</span> <span class="nx">rectSize</span><span class="p">));</span>
+  <span class="kd">var</span> <span class="nx">cornerSize</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="nx">cornerRadius</span><span class="p">,</span> <span class="nx">cornerRadius</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">rect</span><span class="p">,</span> <span class="nx">cornerSize</span><span class="p">);</span>
+  <span class="nx">shape</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">360</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">newShape</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+      <span class="nx">newShape</span><span class="p">.</span><span class="nx">strokeColor</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="nx">newShape</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="p">[</span><span class="nx">rectSize</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="nx">rectSize</span><span class="o">/</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="nx">shape</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0006&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
+    <script type="text/paperscript" canvas="canvas-0005">
+  var color = new Color('#0074d9');
+  color.alpha = 0.6;
+
+  var circle = new Path.Circle({
+        center: [100, 100],
+        radius: 20,
+        fillColor: color
+      });
+
+  circle.scale(1.5, 3.5);
+
+  for (i = 0; i < 360; i += 60) {
+    var newCircle = circle.clone();
+    newCircle.fillColor.hue += i;
+    newCircle.blendMode = 'screen';
+    newCircle.rotate(i, [100, 150]);
+  }
+
+  circle.remove();
+
+  project.activeLayer.position = view.center;
+</script>
+
+<canvas id="canvas-0005"></canvas>
+
+    <a href="/2014/10/01/hue-flower.html" class="post-date">01 Oct 2014</a>
+    <p class="post-description">
+      Rotating paths, hue shifting, and blending modes. <a href="#">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0005&quot;</span><span class="o">&gt;</span>
+  <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;#0074d9&#39;</span><span class="p">);</span>
+  <span class="nx">color</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">circle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
+        <span class="nx">center</span><span class="o">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
+        <span class="nx">radius</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
+        <span class="nx">fillColor</span><span class="o">:</span> <span class="nx">color</span>
+      <span class="p">});</span>
+
+  <span class="nx">circle</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">360</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">60</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">newCircle</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+    <span class="nx">newCircle</span><span class="p">.</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="nx">i</span><span class="p">;</span>
+    <span class="nx">newCircle</span><span class="p">.</span><span class="nx">blendMode</span> <span class="o">=</span> <span class="s1">&#39;screen&#39;</span><span class="p">;</span>
+    <span class="nx">newCircle</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="nx">circle</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+
+  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0005&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
+    <script type="text/paperscript" canvas="canvas-0004">
+  view.element.style.backgroundColor = '#111111';
+
+  var color = new Color('#0074d9');
+  var strokeWidth = view.size.height * 0.04;
+
+  var c = view.size.height / 3;
+  var a = c/2;
+  var b = Math.sin(60 * Math.PI / 180) * c;
+
+  path = new Path.Line([0, b], [a, 0]);
+  var color1 = color.clone();
+  var color2 = color.clone();
+  color2.hue += 60;
+  var gradient = new Gradient([color1, color2]);
+  path.strokeColor = new Color(gradient, [0, b], [a, 0]);
+  path.strokeWidth = strokeWidth;
+  path.strokeCap = 'round';
+
+  path = new Path.Line([a, 0], [a+c, 0]);
+  var color1 = color.clone();
+  var color2 = color.clone();
+  color1.hue += 60;
+  color2.hue += 120;
+  var gradient = new Gradient([color1, color2]);
+  path.strokeColor = new Color(gradient, [a, 0], [a+c, 0]);
+  path.strokeWidth = strokeWidth;
+  path.strokeCap = 'round';
+
+  path = new Path.Line([a+c, 0], [2*c, b]);
+  var color1 = color.clone();
+  var color2 = color.clone();
+  color1.hue += 120;
+  color2.hue += 180;
+  var gradient = new Gradient([color1, color2]);
+  path.strokeColor = new Color(gradient, [a+c, 0], [2*c, b]);
+  path.strokeWidth = strokeWidth;
+  path.strokeCap = 'round';
+
+  path = new Path.Line([2*c, b], [a+c, 2*b]);
+  var color1 = color.clone();
+  var color2 = color.clone();
+  color1.hue += 180;
+  color2.hue += 240;
+  var gradient = new Gradient([color1, color2]);
+  path.strokeColor = new Color(gradient, [2*c, b], [a+c, 2*b]);
+  path.strokeWidth = strokeWidth;
+  path.strokeCap = 'round';
+
+  path = new Path.Line([a+c, 2*b], [a, 2*b]);
+  var color1 = color.clone();
+  var color2 = color.clone();
+  color1.hue += 240;
+  color2.hue += 300;
+  var gradient = new Gradient([color1, color2]);
+  path.strokeColor = new Color(gradient, [a+c, 2*b], [a, 2*b]);
+  path.strokeWidth = strokeWidth;
+  path.strokeCap = 'round';
+
+  path = new Path.Line([a, 2*b], [0, b]);
+  var color1 = color.clone();
+  var color2 = color.clone();
+  color1.hue += 300;
+  color2.hue += 360;
+  var gradient = new Gradient([color1, color2]);
+  path.strokeColor = new Color(gradient, [a, 2*b], [0, b]);
+  path.strokeWidth = strokeWidth;
+  path.strokeCap = 'round';
+
+  project.activeLayer.position = view.center;
+</script>
+
+<canvas id="canvas-0004"></canvas>
+
+    <a href="/2014/09/30/gradient-hexagon.html" class="post-date">30 Sep 2014</a>
+    <p class="post-description">
+      Overly verbose code for a continuous gradient hexagon. <a href="#">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0004&quot;</span><span class="o">&gt;</span>
+  <span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;#111111&#39;</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;#0074d9&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="mf">0.04</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">c</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="mi">180</span><span class="p">)</span> <span class="o">*</span> <span class="nx">c</span><span class="p">;</span>
+
+  <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">]);</span>
+  <span class="kd">var</span> <span class="nx">color1</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="nx">color2</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">60</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">gradient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gradient</span><span class="p">([</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="nx">gradient</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">strokeWidth</span><span class="p">;</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeCap</span> <span class="o">=</span> <span class="s1">&#39;round&#39;</span><span class="p">;</span>
+
+  <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="nx">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">]);</span>
+  <span class="kd">var</span> <span class="nx">color1</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="nx">color1</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">60</span><span class="p">;</span>
+  <span class="nx">color2</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">120</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">gradient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gradient</span><span class="p">([</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="nx">gradient</span><span class="p">,</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">strokeWidth</span><span class="p">;</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeCap</span> <span class="o">=</span> <span class="s1">&#39;round&#39;</span><span class="p">;</span>
+
+  <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="nx">c</span><span class="p">,</span> <span class="nx">b</span><span class="p">]);</span>
+  <span class="kd">var</span> <span class="nx">color1</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="nx">color1</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">120</span><span class="p">;</span>
+  <span class="nx">color2</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">180</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">gradient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gradient</span><span class="p">([</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="nx">gradient</span><span class="p">,</span> <span class="p">[</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="nx">c</span><span class="p">,</span> <span class="nx">b</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">strokeWidth</span><span class="p">;</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeCap</span> <span class="o">=</span> <span class="s1">&#39;round&#39;</span><span class="p">;</span>
+
+  <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="mi">2</span><span class="o">*</span><span class="nx">c</span><span class="p">,</span> <span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">]);</span>
+  <span class="kd">var</span> <span class="nx">color1</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="nx">color1</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">180</span><span class="p">;</span>
+  <span class="nx">color2</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">240</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">gradient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gradient</span><span class="p">([</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="nx">gradient</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="nx">c</span><span class="p">,</span> <span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">strokeWidth</span><span class="p">;</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeCap</span> <span class="o">=</span> <span class="s1">&#39;round&#39;</span><span class="p">;</span>
+
+  <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">]);</span>
+  <span class="kd">var</span> <span class="nx">color1</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="nx">color1</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">240</span><span class="p">;</span>
+  <span class="nx">color2</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">300</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">gradient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gradient</span><span class="p">([</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="nx">gradient</span><span class="p">,</span> <span class="p">[</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">strokeWidth</span><span class="p">;</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeCap</span> <span class="o">=</span> <span class="s1">&#39;round&#39;</span><span class="p">;</span>
+
+  <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="nx">a</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nx">b</span><span class="p">]);</span>
+  <span class="kd">var</span> <span class="nx">color1</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="nx">color1</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">300</span><span class="p">;</span>
+  <span class="nx">color2</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">360</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">gradient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gradient</span><span class="p">([</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="nx">gradient</span><span class="p">,</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nx">b</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">strokeWidth</span><span class="p">;</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeCap</span> <span class="o">=</span> <span class="s1">&#39;round&#39;</span><span class="p">;</span>
+
+  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0004&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
     <script type="text/paperscript" canvas="canvas-0003">
   view.element.style.backgroundColor = '#111111';
 

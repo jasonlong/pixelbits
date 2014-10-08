@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Sine waves
-updated_at: Sep 28, 2014
 
 description: Sine waves made by manipulating bezier handles.
 tags:

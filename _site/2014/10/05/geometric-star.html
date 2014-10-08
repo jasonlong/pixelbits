@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Pixelbits by Jason Long</title>
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/site.css">
+    <script src="/lib/paper-full.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="site-name"><a href="/">Pixelbits</a></h1>
+      <p class="lead">Hi, I'm <a href="http://twitter.com/jasonlong">@jasonlong</a>. I'm trying to make a small creative coding sketch every day(ish) to learn new things.</p>
+
+<div class="post">
+  <script type="text/paperscript" canvas="canvas-0007">
+  var bgColor = "#2f325c";
+  var fgColor = "#405e7d";
+
+  view.element.style.backgroundColor = bgColor;
+
+  var center = new Point(0, 0);
+  var points = 4;
+  var radius1 = view.size.height / 12;
+  var radius2 = view.size.height / 3;
+
+  var star = new Path.Star(center, points, radius1, radius2);
+  star.strokeColor = fgColor;
+  star.rotate(45);
+  var lineH = new Path.Line({
+      from: [0, -radius2],
+      to: [0, radius2],
+      strokeColor: fgColor
+  });
+
+  var lineV = new Path.Line({
+      from: [-radius2, 0],
+      to: [radius2, 0],
+      strokeColor: fgColor
+  });
+
+  var starGroup = new Group();
+  starGroup.addChildren([star, lineH, lineV]);
+
+  // Stars
+  for (i = 0; i < 90; i += 22.5) {
+      var newStar = starGroup.clone();
+      newStar.rotate(i);
+  }
+  starGroup.remove();
+
+  // Circles
+  for (i = radius1; i <= radius2; i += radius1) {
+      var circle = new Path.Circle(new Point(0, 0), i);
+      circle.strokeColor = fgColor;
+  }
+
+  project.activeLayer.position = view.center;
+</script>
+
+<canvas id="canvas-0007" height="250"></canvas>
+
+  <span class="post-date">05 Oct 2014</span>
+  <p class="post-description">Copying and rotating shape groups.</p>
+
+  
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0007&quot;</span><span class="o">&gt;</span>
+  <span class="kd">var</span> <span class="nx">bgColor</span> <span class="o">=</span> <span class="s2">&quot;#2f325c&quot;</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">fgColor</span> <span class="o">=</span> <span class="s2">&quot;#405e7d&quot;</span><span class="p">;</span>
+
+  <span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="nx">bgColor</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">center</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">radius1</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">12</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">radius2</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">star</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Star</span><span class="p">(</span><span class="nx">center</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">radius1</span><span class="p">,</span> <span class="nx">radius2</span><span class="p">);</span>
+  <span class="nx">star</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">fgColor</span><span class="p">;</span>
+  <span class="nx">star</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">45</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">lineH</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">({</span>
+      <span class="nx">from</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="nx">radius2</span><span class="p">],</span>
+      <span class="nx">to</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nx">radius2</span><span class="p">],</span>
+      <span class="nx">strokeColor</span><span class="o">:</span> <span class="nx">fgColor</span>
+  <span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">lineV</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">({</span>
+      <span class="nx">from</span><span class="o">:</span> <span class="p">[</span><span class="o">-</span><span class="nx">radius2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+      <span class="nx">to</span><span class="o">:</span> <span class="p">[</span><span class="nx">radius2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+      <span class="nx">strokeColor</span><span class="o">:</span> <span class="nx">fgColor</span>
+  <span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">starGroup</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Group</span><span class="p">();</span>
+  <span class="nx">starGroup</span><span class="p">.</span><span class="nx">addChildren</span><span class="p">([</span><span class="nx">star</span><span class="p">,</span> <span class="nx">lineH</span><span class="p">,</span> <span class="nx">lineV</span><span class="p">]);</span>
+
+  <span class="c1">// Stars</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">90</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mf">22.5</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">newStar</span> <span class="o">=</span> <span class="nx">starGroup</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+      <span class="nx">newStar</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="nx">starGroup</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+
+  <span class="c1">// Circles</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="nx">radius1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">radius2</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="nx">radius1</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">circle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nx">i</span><span class="p">);</span>
+      <span class="nx">circle</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">fgColor</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0007&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+
+</div>
+    </div>
+  </body>
+</html>
+
