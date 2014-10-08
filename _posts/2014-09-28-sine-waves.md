@@ -3,7 +3,9 @@ layout: default
 title: Sine waves
 updated_at: Sep 28, 2014
 
-description:
+description: Sine waves made by manipulating bezier handles.
+tags:
+  - paperjs
 ---
 
 <script type="text/paperscript" canvas="canvas-0002">

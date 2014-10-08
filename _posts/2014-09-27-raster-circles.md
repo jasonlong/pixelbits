@@ -3,7 +3,9 @@ layout: default
 title: Raster circles
 updated_at: Sep 27, 2014
 
-description:
+description: Getting colors from raster image. Basically copied from the Paper.js Mona Lisa example.
+tags:
+  - paperjs
 ---
 
 <script type="text/paperscript" canvas="canvas-0001">

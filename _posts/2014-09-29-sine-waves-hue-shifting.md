@@ -3,7 +3,9 @@ layout: default
 title: Sine waves with hue shifting
 updated_at: Sep 29, 2014
 
-description:
+description: Shifting hues using yesterday's sine wave.
+tags:
+  - paperjs
 ---
 
 <script type="text/paperscript" canvas="canvas-0003">

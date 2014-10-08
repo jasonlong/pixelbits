@@ -55,3 +55,23 @@ a:hover {
 canvas {
   width: 100%;
 }
+
+.post {
+  margin-bottom: 40px;
+}
+
+.post-description {
+  margin-top: 0;
+}
+
+pre,
+code {
+  font-size: 14px;
+  font-family: Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+}
+
+.highlight > pre {
+  border-radius: 3px;
+  background-color: #f9f9f9;
+  padding: 10px;
+}

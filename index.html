@@ -3,5 +3,12 @@ layout: default
 ---
 
 {% for post in site.posts %}
-  {{ post.content }}
+  <div class="post">
+    {{ post.content }}
+    <p class="post-description">{{ post.description }}</p>
+
+    {% highlight javascript %}
+      {{ post.content }}
+    {% endhighlight %}
+  </div>
 {% endfor %}
