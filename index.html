@@ -7,7 +7,7 @@ layout: default
     {{ post.content }}
     <a href="{{post.url}}" class="post-date">{{ post.date | date_to_string }}</a>
     <p class="post-description">
-      {{ post.description }} <a href="#">Show code</a>
+      {{ post.description }} <a href="#" class="js-show-code">Show code</a>
     </p>
 
     <div class="code">
