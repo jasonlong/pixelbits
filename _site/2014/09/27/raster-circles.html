@@ -14,64 +14,7 @@
     <div class="container">
       <h1 class="site-name"><a href="/">Pixelbits</a></h1>
       <p class="lead">Hi, I'm <a href="http://twitter.com/jasonlong">@jasonlong</a>. I'm trying to make a small creative coding sketch every day to learn new things.</p>
-      
-  <script type="text/paperscript" canvas="canvas-0003">
-  view.element.style.backgroundColor = '#111111';
-
-  var y = view.size.height / 2;
-  var width = view.size.width * 0.9;
-  var vector = new Point({
-        angle: 45,
-        length: width / 5
-        });
-  var offset = width / 30;
-  var color = new Color('#0074d9')
-
-  for (var i = 0; i < 40; i+=3) {
-    var path = new Path();
-    vector.length += i;
-    path.segments = [
-      [[offset, y], null, vector.rotate(-90-i)],
-      [[width / 2, y], vector.rotate(-180+i), vector.rotate(i)],
-      [[width - offset, y], vector.rotate(90-i), null]
-    ];
-    path.strokeColor = color;
-    path.strokeColor.hue += i * 10;
-  }
-  project.activeLayer.position = view.center;
-</script>
-
-<canvas id="canvas-0003" height="300"></canvas>
-
-
-  <script type="text/paperscript" canvas="canvas-0002">
-
-  var y = view.size.height / 2;
-  var width = view.size.width * 0.9;
-  var vector = new Point({
-        angle: 45,
-        length: width / 5
-        });
-  var offset = width / 30;
-
-  for (var i = 0; i < 40; i+=3) {
-    var path = new Path();
-    vector.length += i;
-    path.segments = [
-      [[offset, y], null, vector.rotate(-90-i)],
-      [[width / 2, y], vector.rotate(-180+i), vector.rotate(i)],
-      [[width - offset, y], vector.rotate(90-i), null]
-    ];
-    path.strokeColor = '#0074d9';
-  }
-
-  project.activeLayer.position = view.center;
-</script>
-
-<canvas id="canvas-0002" height="300"></canvas>
-
-
-  <script type="text/paperscript" canvas="canvas-0001">
+      <script type="text/paperscript" canvas="canvas-0001">
   var raster = new Raster('/0001/starry-night.jpg');
 
   // Hide the original image
@@ -116,8 +59,6 @@
 </script>
 
 <canvas id="canvas-0001"></canvas>
-
-
 
     </div>
   </body>
