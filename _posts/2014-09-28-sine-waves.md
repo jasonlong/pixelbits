@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Sine waves
 updated_at: Sep 28, 2014
 

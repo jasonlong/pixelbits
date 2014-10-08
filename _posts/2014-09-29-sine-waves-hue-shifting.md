@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title: Sine waves with hue shifting
 updated_at: Sep 29, 2014
 

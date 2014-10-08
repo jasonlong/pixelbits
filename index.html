@@ -5,10 +5,15 @@ layout: default
 {% for post in site.posts %}
   <div class="post">
     {{ post.content }}
-    <p class="post-description">{{ post.description }}</p>
+    <a href="{{post.url}}" class="post-date">{{ post.date | date_to_string }}</a>
+    <p class="post-description">
+      {{ post.description }} <a href="#">Show code</a>
+    </p>
 
-    {% highlight javascript %}
-      {{ post.content }}
-    {% endhighlight %}
+    <div class="code">
+      {% highlight javascript %}
+        {{ post.content }}
+      {% endhighlight %}
+    </div>
   </div>
 {% endfor %}

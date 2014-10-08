@@ -6,16 +6,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title>Pixelbits by Jason Long</title>
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/syntax.css">
-    <link rel="stylesheet" href="css/site.css">
-    <script src="lib/paper-full.min.js"></script>
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/site.css">
+    <script src="/lib/paper-full.min.js"></script>
   </head>
   <body>
     <div class="container">
       <h1 class="site-name"><a href="/">Pixelbits</a></h1>
       <p class="lead">Hi, I'm <a href="http://twitter.com/jasonlong">@jasonlong</a>. I'm trying to make a small creative coding sketch every day(ish) to learn new things.</p>
-      
+
+  
   <div class="post">
     <script type="text/paperscript" canvas="canvas-0003">
   view.element.style.backgroundColor = '#111111';
@@ -45,9 +46,13 @@
 
 <canvas id="canvas-0003" height="300"></canvas>
 
-    <p class="post-description">Shifting hues using yesterday's sine wave.</p>
+    <a href="/2014/09/29/sine-waves-hue-shifting.html" class="post-date">29 Sep 2014</a>
+    <p class="post-description">
+      Shifting hues using yesterday's sine wave. <a href="#">Show code</a>
+    </p>
 
-    <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0003&quot;</span><span class="o">&gt;</span>
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0003&quot;</span><span class="o">&gt;</span>
   <span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;#111111&#39;</span><span class="p">;</span>
 
   <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
@@ -74,6 +79,7 @@
 <span class="o">&lt;</span><span class="err">/script&gt;</span>
 
 <span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0003&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;300&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
   </div>
 
   <div class="post">
@@ -103,9 +109,13 @@
 
 <canvas id="canvas-0002" height="300"></canvas>
 
-    <p class="post-description">Sine waves made by manipulating bezier handles.</p>
+    <a href="/2014/09/28/sine-waves.html" class="post-date">28 Sep 2014</a>
+    <p class="post-description">
+      Sine waves made by manipulating bezier handles. <a href="#">Show code</a>
+    </p>
 
-    <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0002&quot;</span><span class="o">&gt;</span>
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0002&quot;</span><span class="o">&gt;</span>
 
   <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
   <span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">;</span>
@@ -130,6 +140,7 @@
 <span class="o">&lt;</span><span class="err">/script&gt;</span>
 
 <span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0002&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;300&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
   </div>
 
   <div class="post">
@@ -179,9 +190,13 @@
 
 <canvas id="canvas-0001"></canvas>
 
-    <p class="post-description">Getting colors from raster image. Basically copied from the Paper.js Mona Lisa example.</p>
+    <a href="/2014/09/27/raster-circles.html" class="post-date">27 Sep 2014</a>
+    <p class="post-description">
+      Getting colors from raster image. Basically copied from the Paper.js Mona Lisa example. <a href="#">Show code</a>
+    </p>
 
-    <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0001&quot;</span><span class="o">&gt;</span>
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0001&quot;</span><span class="o">&gt;</span>
   <span class="kd">var</span> <span class="nx">raster</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Raster</span><span class="p">(</span><span class="s1">&#39;0001/starry-night.jpg&#39;</span><span class="p">);</span>
 
   <span class="c1">// Hide the original image</span>
@@ -226,6 +241,7 @@
 <span class="o">&lt;</span><span class="err">/script&gt;</span>
 
 <span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0001&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
   </div>
 
 
