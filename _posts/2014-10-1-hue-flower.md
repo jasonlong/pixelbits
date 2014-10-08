@@ -31,4 +31,4 @@ tags:
   project.activeLayer.position = view.center;
 </script>
 
-<canvas id="canvas-0005"></canvas>
+<canvas id="canvas-0005" height="250"></canvas>
