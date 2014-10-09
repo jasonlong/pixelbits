@@ -6,19 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title>Pixelbits by Jason Long</title>
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
-    <link rel="stylesheet" href="/css/normalize.css">
-    <link rel="stylesheet" href="/css/syntax.css">
-    <link rel="stylesheet" href="/css/site.css">
-    <script src="/js/paper-full.min.js"></script>
-    <script src="/js/zepto.min.js"></script>
-    <script src="/js/site.js"></script>
+    <link rel="stylesheet" href="/pixelbits/css/normalize.css">
+    <link rel="stylesheet" href="/pixelbits/css/syntax.css">
+    <link rel="stylesheet" href="/pixelbits/css/site.css">
+    <script src="/pixelbits/js/paper-full.min.js"></script>
+    <script src="/pixelbits/js/zepto.min.js"></script>
+    <script src="/pixelbits/js/site.js"></script>
   </head>
   <body>
     <div class="container">
-      <h1 class="site-name"><a href="">Pixelbits</a></h1>
+      <h1 class="site-name"><a href="/pixelbits">Pixelbits</a></h1>
       <p class="lead">Hi, I'm <a href="http://twitter.com/jasonlong">@jasonlong</a>. I'm trying to make a small creative coding sketch every day(ish) to learn new things.</p>
 
   
+  <div class="post">
+    <script type="text/paperscript" canvas="canvas-0009">
+  var radius = view.size.width / 4;
+  var start1 = new Point(radius, view.size.height / 2);
+  var start2 = new Point(view.size.width - radius, view.size.height / 2);
+
+  var circle1 = new Path.Circle({
+    center: start1,
+    radius: radius,
+    fillColor: '#0074d9'
+  });
+  var circle2 = new Path.Circle({
+    center: start2,
+    radius: radius,
+    fillColor: '#ff4136'
+  });
+
+  function onFrame(event) {
+    var vector1 = start2 - circle1.position;
+    var vector2 = start1 - circle2.position;
+
+    if (vector1.length == 0) {
+      var tmpStart = start1;
+      start1 = start2;
+      start2 = tmpStart;
+    }
+
+    circle1.position.x += (vector1.x < 0) ? -2 : 2;
+    circle2.position.x += (vector2.x < 0) ? -2 : 2;
+
+  }
+</script>
+
+<canvas id="canvas-0009" height="250"></canvas>
+
+    <a href="/pixelbits/2014/10/09/animated-blend-modes.html" class="post-date">09 Oct 2014</a>
+    <p class="post-description">
+      Animated circles cycling between color blending modes. <a href="#" class="js-show-code">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0009&quot;</span><span class="o">&gt;</span>
+  <span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">4</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">start1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">start2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">-</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
+
+  <span class="kd">var</span> <span class="nx">circle1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
+    <span class="nx">center</span><span class="o">:</span> <span class="nx">start1</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;#0074d9&#39;</span>
+  <span class="p">});</span>
+  <span class="kd">var</span> <span class="nx">circle2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
+    <span class="nx">center</span><span class="o">:</span> <span class="nx">start2</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
+    <span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;#ff4136&#39;</span>
+  <span class="p">});</span>
+
+  <span class="kd">function</span> <span class="nx">onFrame</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">vector1</span> <span class="o">=</span> <span class="nx">start2</span> <span class="o">-</span> <span class="nx">circle1</span><span class="p">.</span><span class="nx">position</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">vector2</span> <span class="o">=</span> <span class="nx">start1</span> <span class="o">-</span> <span class="nx">circle2</span><span class="p">.</span><span class="nx">position</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="nx">vector1</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">tmpStart</span> <span class="o">=</span> <span class="nx">start1</span><span class="p">;</span>
+      <span class="nx">start1</span> <span class="o">=</span> <span class="nx">start2</span><span class="p">;</span>
+      <span class="nx">start2</span> <span class="o">=</span> <span class="nx">tmpStart</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="nx">circle1</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="p">(</span><span class="nx">vector1</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="o">-</span><span class="mi">2</span> <span class="o">:</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="nx">circle2</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="p">(</span><span class="nx">vector2</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="o">-</span><span class="mi">2</span> <span class="o">:</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0009&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
   <div class="post">
     <script type="text/paperscript" canvas="canvas-0008">
   var columns = 12;
@@ -60,7 +137,7 @@
 
 <canvas id="canvas-0008" height="250"></canvas>
 
-    <a href="/2014/10/07/shaded-cubes.html" class="post-date">07 Oct 2014</a>
+    <a href="/pixelbits/2014/10/07/shaded-cubes.html" class="post-date">07 Oct 2014</a>
     <p class="post-description">
       Isometric cubes with faux shadows. <a href="#" class="js-show-code">Show code</a>
     </p>
@@ -156,7 +233,7 @@
 
 <canvas id="canvas-0007" height="250"></canvas>
 
-    <a href="/2014/10/05/geometric-star.html" class="post-date">05 Oct 2014</a>
+    <a href="/pixelbits/2014/10/05/geometric-star.html" class="post-date">05 Oct 2014</a>
     <p class="post-description">
       Copying and rotating shape groups. <a href="#" class="js-show-code">Show code</a>
     </p>
@@ -236,7 +313,7 @@
 
 <canvas id="canvas-0006" height="250"></canvas>
 
-    <a href="/2014/10/04/rainbow-pseudo-spirograph.html" class="post-date">04 Oct 2014</a>
+    <a href="/pixelbits/2014/10/04/rainbow-pseudo-spirograph.html" class="post-date">04 Oct 2014</a>
     <p class="post-description">
       Pseudo-spirograph made of rotating rounded squares. <a href="#" class="js-show-code">Show code</a>
     </p>
@@ -295,7 +372,7 @@
 
 <canvas id="canvas-0005" height="250"></canvas>
 
-    <a href="/2014/10/01/hue-flower.html" class="post-date">01 Oct 2014</a>
+    <a href="/pixelbits/2014/10/01/hue-flower.html" class="post-date">01 Oct 2014</a>
     <p class="post-description">
       Rotating paths, hue shifting, and blending modes. <a href="#" class="js-show-code">Show code</a>
     </p>
@@ -404,7 +481,7 @@
 
 <canvas id="canvas-0004"></canvas>
 
-    <a href="/2014/09/30/gradient-hexagon.html" class="post-date">30 Sep 2014</a>
+    <a href="/pixelbits/2014/09/30/gradient-hexagon.html" class="post-date">30 Sep 2014</a>
     <p class="post-description">
       Overly verbose code for a continuous gradient hexagon. <a href="#" class="js-show-code">Show code</a>
     </p>
@@ -515,7 +592,7 @@
 
 <canvas id="canvas-0003" height="300"></canvas>
 
-    <a href="/2014/09/29/sine-waves-hue-shifting.html" class="post-date">29 Sep 2014</a>
+    <a href="/pixelbits/2014/09/29/sine-waves-hue-shifting.html" class="post-date">29 Sep 2014</a>
     <p class="post-description">
       Shifting hues using yesterday's sine wave. <a href="#" class="js-show-code">Show code</a>
     </p>
@@ -578,7 +655,7 @@
 
 <canvas id="canvas-0002" height="300"></canvas>
 
-    <a href="/2014/09/28/sine-waves.html" class="post-date">28 Sep 2014</a>
+    <a href="/pixelbits/2014/09/28/sine-waves.html" class="post-date">28 Sep 2014</a>
     <p class="post-description">
       Sine waves made by manipulating bezier handles. <a href="#" class="js-show-code">Show code</a>
     </p>
@@ -659,7 +736,7 @@
 
 <canvas id="canvas-0001"></canvas>
 
-    <a href="/2014/09/27/raster-circles.html" class="post-date">27 Sep 2014</a>
+    <a href="/pixelbits/2014/09/27/raster-circles.html" class="post-date">27 Sep 2014</a>
     <p class="post-description">
       Getting colors from raster image. Basically copied from the Paper.js Mona Lisa example. <a href="#" class="js-show-code">Show code</a>
     </p>
