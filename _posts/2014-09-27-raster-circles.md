@@ -8,7 +8,7 @@ tags:
 ---
 
 <script type="text/paperscript" canvas="canvas-0001">
-  var raster = new Raster('0001/starry-night.jpg');
+  var raster = new Raster('assets/starry-night.jpg');
 
   // Hide the original image
   raster.visible = false;
