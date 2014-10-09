@@ -1,6 +1,6 @@
 ---
+layout: post
 title: Raster circles
-updated_at: Sep 27, 2014
 
 description: Getting colors from raster image. Basically copied from the Paper.js Mona Lisa example.
 tags:
@@ -8,7 +8,7 @@ tags:
 ---
 
 <script type="text/paperscript" canvas="canvas-0001">
-  var raster = new Raster('assets/starry-night.jpg');
+  var raster = new Raster('/pixelbits/assets/starry-night.jpg');
 
   // Hide the original image
   raster.visible = false;
