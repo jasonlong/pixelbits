@@ -25,15 +25,21 @@
   var start1 = new Point(radius, view.size.height / 2);
   var start2 = new Point(view.size.width - radius, view.size.height / 2);
 
+  var modes = ['multiply', 'screen', 'overlay', 'soft-light', 'hard-light', 'color-dodge'];
+
+  var modeIndex = 0;
+
   var circle1 = new Path.Circle({
     center: start1,
     radius: radius,
-    fillColor: '#0074d9'
+    fillColor: '#0074d9',
+    blendMode: modes[modeIndex]
   });
   var circle2 = new Path.Circle({
     center: start2,
     radius: radius,
-    fillColor: '#ff4136'
+    fillColor: '#ff4136',
+    blendMode: modes[modeIndex]
   });
 
   function onFrame(event) {
@@ -41,9 +47,20 @@
     var vector2 = start1 - circle2.position;
 
     if (vector1.length == 0) {
+      // swap directions
       var tmpStart = start1;
       start1 = start2;
       start2 = tmpStart;
+
+      if (modes.length - 1 == modeIndex) {
+        modeIndex = 0;
+      }
+      else {
+        modeIndex++;
+      }
+
+      circle1.blendMode = modes[modeIndex];
+      circle2.blendMode = modes[modeIndex];
     }
 
     circle1.position.x += (vector1.x < 0) ? -2 : 2;
@@ -54,7 +71,7 @@
 
 <canvas id="canvas-0009" height="250"></canvas>
 
-    <a href="/pixelbits/2014/10/09/animated-blend-modes.html" class="post-date">09 Oct 2014</a>
+    <a href="/pixelbits/2014/10/10/animated-blend-modes.html" class="post-date">10 Oct 2014</a>
     <p class="post-description">
       Animated circles cycling between color blending modes. <a href="#" class="js-show-code">Show code</a>
     </p>
@@ -65,15 +82,21 @@
   <span class="kd">var</span> <span class="nx">start1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">radius</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
   <span class="kd">var</span> <span class="nx">start2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">-</span> <span class="nx">radius</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
 
+  <span class="kd">var</span> <span class="nx">modes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;multiply&#39;</span><span class="p">,</span> <span class="s1">&#39;screen&#39;</span><span class="p">,</span> <span class="s1">&#39;overlay&#39;</span><span class="p">,</span> <span class="s1">&#39;soft-light&#39;</span><span class="p">,</span> <span class="s1">&#39;hard-light&#39;</span><span class="p">,</span> <span class="s1">&#39;color-dodge&#39;</span><span class="p">];</span>
+
+  <span class="kd">var</span> <span class="nx">modeIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
   <span class="kd">var</span> <span class="nx">circle1</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
     <span class="nx">center</span><span class="o">:</span> <span class="nx">start1</span><span class="p">,</span>
     <span class="nx">radius</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
-    <span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;#0074d9&#39;</span>
+    <span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;#0074d9&#39;</span><span class="p">,</span>
+    <span class="nx">blendMode</span><span class="o">:</span> <span class="nx">modes</span><span class="p">[</span><span class="nx">modeIndex</span><span class="p">]</span>
   <span class="p">});</span>
   <span class="kd">var</span> <span class="nx">circle2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
     <span class="nx">center</span><span class="o">:</span> <span class="nx">start2</span><span class="p">,</span>
     <span class="nx">radius</span><span class="o">:</span> <span class="nx">radius</span><span class="p">,</span>
-    <span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;#ff4136&#39;</span>
+    <span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;#ff4136&#39;</span><span class="p">,</span>
+    <span class="nx">blendMode</span><span class="o">:</span> <span class="nx">modes</span><span class="p">[</span><span class="nx">modeIndex</span><span class="p">]</span>
   <span class="p">});</span>
 
   <span class="kd">function</span> <span class="nx">onFrame</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
@@ -81,9 +104,20 @@
     <span class="kd">var</span> <span class="nx">vector2</span> <span class="o">=</span> <span class="nx">start1</span> <span class="o">-</span> <span class="nx">circle2</span><span class="p">.</span><span class="nx">position</span><span class="p">;</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">vector1</span><span class="p">.</span><span class="nx">length</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// swap directions</span>
       <span class="kd">var</span> <span class="nx">tmpStart</span> <span class="o">=</span> <span class="nx">start1</span><span class="p">;</span>
       <span class="nx">start1</span> <span class="o">=</span> <span class="nx">start2</span><span class="p">;</span>
       <span class="nx">start2</span> <span class="o">=</span> <span class="nx">tmpStart</span><span class="p">;</span>
+
+      <span class="k">if</span> <span class="p">(</span><span class="nx">modes</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">==</span> <span class="nx">modeIndex</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">modeIndex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="nx">modeIndex</span><span class="o">++</span><span class="p">;</span>
+      <span class="p">}</span>
+
+      <span class="nx">circle1</span><span class="p">.</span><span class="nx">blendMode</span> <span class="o">=</span> <span class="nx">modes</span><span class="p">[</span><span class="nx">modeIndex</span><span class="p">];</span>
+      <span class="nx">circle2</span><span class="p">.</span><span class="nx">blendMode</span> <span class="o">=</span> <span class="nx">modes</span><span class="p">[</span><span class="nx">modeIndex</span><span class="p">];</span>
     <span class="p">}</span>
 
     <span class="nx">circle1</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="p">(</span><span class="nx">vector1</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="o">-</span><span class="mi">2</span> <span class="o">:</span> <span class="mi">2</span><span class="p">;</span>
