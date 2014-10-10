@@ -2,7 +2,7 @@
 layout: post
 title: Animated blending modes
 
-description: Animated circles cycling between color blending modes.
+description: Animated circles shifting hues and cycling between color blending modes.
 tags:
   - paperjs
 ---
@@ -53,6 +53,8 @@ tags:
     circle1.position.x += (vector1.x < 0) ? -2 : 2;
     circle2.position.x += (vector2.x < 0) ? -2 : 2;
 
+    circle1.fillColor.hue += 1;
+    circle2.fillColor.hue += 1;
   }
 </script>
 

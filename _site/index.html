@@ -66,6 +66,8 @@
     circle1.position.x += (vector1.x < 0) ? -2 : 2;
     circle2.position.x += (vector2.x < 0) ? -2 : 2;
 
+    circle1.fillColor.hue += 1;
+    circle2.fillColor.hue += 1;
   }
 </script>
 
@@ -73,7 +75,7 @@
 
     <a href="/pixelbits/2014/10/10/animated-blend-modes.html" class="post-date">10 Oct 2014</a>
     <p class="post-description">
-      Animated circles cycling between color blending modes. <a href="#" class="js-show-code">Show code</a>
+      Animated circles shifting hues and cycling between color blending modes. <a href="#" class="js-show-code">Show code</a>
     </p>
 
     <div class="code">
@@ -123,6 +125,8 @@
     <span class="nx">circle1</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="p">(</span><span class="nx">vector1</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="o">-</span><span class="mi">2</span> <span class="o">:</span> <span class="mi">2</span><span class="p">;</span>
     <span class="nx">circle2</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">+=</span> <span class="p">(</span><span class="nx">vector2</span><span class="p">.</span><span class="nx">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="o">?</span> <span class="o">-</span><span class="mi">2</span> <span class="o">:</span> <span class="mi">2</span><span class="p">;</span>
 
+    <span class="nx">circle1</span><span class="p">.</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="nx">circle2</span><span class="p">.</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="o">&lt;</span><span class="err">/script&gt;</span>
 
