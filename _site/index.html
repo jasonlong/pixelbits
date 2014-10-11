@@ -21,6 +21,39 @@
   
   <div class="post">
     <script type="text/paperscript" canvas="canvas-0009">
+  for (i = view.size.width; i = 0; i--) {
+  console.log(i);
+    var rect = new Rectangle(view.center, i);
+    var path = new Path.Rectangle(rect, 6);
+    path.strokeWidth = 6;
+    path.strokeColor = (i % 2) ? '#111' : '#fff';
+  }
+</script>
+
+<canvas id="canvas-0009" height="250"></canvas>
+
+    <a href="/pixelbits/2014/10/11/square-tunnel.html" class="post-date">11 Oct 2014</a>
+    <p class="post-description">
+      Rotating square tunnel inspired by Albert Omoss' <a href="http://albertomoss.com/work/pivot">Pivot</a> project. <a href="#" class="js-show-code">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0009&quot;</span><span class="o">&gt;</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span> <span class="nx">i</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">rect</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span>
+    <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="mi">6</span><span class="p">;</span>
+    <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="p">(</span><span class="nx">i</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">?</span> <span class="s1">&#39;#111&#39;</span> <span class="o">:</span> <span class="s1">&#39;#fff&#39;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0009&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
+    <script type="text/paperscript" canvas="canvas-0009">
   var radius = view.size.width / 4;
   var start1 = new Point(radius, view.size.height / 2);
   var start2 = new Point(view.size.width - radius, view.size.height / 2);
