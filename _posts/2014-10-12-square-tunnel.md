@@ -15,7 +15,7 @@ tags:
                   center: view.center,
                   size: i
                 });
-    var path = new Path.Rectangle(rect, 6);
+    var path = new Path.Rectangle(rect);
     path.strokeWidth = 0.2 * i;
     path.rotate((view.size.width - i) * 0.17);
 
