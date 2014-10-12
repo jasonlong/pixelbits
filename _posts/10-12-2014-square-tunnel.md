@@ -17,6 +17,7 @@ tags:
                 });
     var path = new Path.Rectangle(rect, 6);
     path.strokeWidth = 0.2 * i;
+    path.rotate((view.size.width - i) * 0.17);
 
     if (color == 'dark') {
       path.strokeColor = '#111111';
