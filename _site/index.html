@@ -23,14 +23,18 @@
     <script type="text/paperscript" canvas="canvas-0010">
   var i = 1;
   var color = 'dark';
-  while (i < view.size.width * 1.5) {
+  while (i < view.size.width / 2) {
     var rect = new Rectangle({
                   center: view.center,
-                  size: i
+                  size: i * 1.5
                 });
     var path = new Path.Rectangle(rect);
     path.strokeWidth = 0.2 * i;
-    path.rotate((view.size.width - i) * 0.17);
+
+    // I tried to rotate the furthest away and nearest squares for a
+    // a nice twisting effect, but the furthest away squares are so
+    // small that they aren't even visible.
+    path.rotate(Math.pow(Math.abs(i - view.size.width/2), 2) * 0.0008);
 
     if (color == 'dark') {
       path.strokeColor = '#111111';
@@ -40,6 +44,7 @@
       path.strokeColor = '#ffffff';
       color = 'dark';
     }
+    // Simulate perspective with top squares appearing closer
     i *= 1.1;
   }
 </script>
@@ -55,14 +60,18 @@
       <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0010&quot;</span><span class="o">&gt;</span>
   <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
   <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="s1">&#39;dark&#39;</span><span class="p">;</span>
-  <span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mf">1.5</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">while</span> <span class="p">(</span><span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">({</span>
                   <span class="nx">center</span><span class="o">:</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
-                  <span class="nx">size</span><span class="o">:</span> <span class="nx">i</span>
+                  <span class="nx">size</span><span class="o">:</span> <span class="nx">i</span> <span class="o">*</span> <span class="mf">1.5</span>
                 <span class="p">});</span>
     <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span>
     <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="o">*</span> <span class="nx">i</span><span class="p">;</span>
-    <span class="nx">path</span><span class="p">.</span><span class="nx">rotate</span><span class="p">((</span><span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">-</span> <span class="nx">i</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.17</span><span class="p">);</span>
+
+    <span class="c1">// I tried to rotate the furthest away and nearest squares for a</span>
+    <span class="c1">// a nice twisting effect, but the furthest away squares are so</span>
+    <span class="c1">// small that they aren&#39;t even visible.</span>
+    <span class="nx">path</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">abs</span><span class="p">(</span><span class="nx">i</span> <span class="o">-</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span><span class="o">/</span><span class="mi">2</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="mf">0.0008</span><span class="p">);</span>
 
     <span class="k">if</span> <span class="p">(</span><span class="nx">color</span> <span class="o">==</span> <span class="s1">&#39;dark&#39;</span><span class="p">)</span> <span class="p">{</span>
       <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="s1">&#39;#111111&#39;</span><span class="p">;</span>
@@ -72,6 +81,7 @@
       <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="s1">&#39;#ffffff&#39;</span><span class="p">;</span>
       <span class="nx">color</span> <span class="o">=</span> <span class="s1">&#39;dark&#39;</span><span class="p">;</span>
     <span class="p">}</span>
+    <span class="c1">// Simulate perspective with top squares appearing closer</span>
     <span class="nx">i</span> <span class="o">*=</span> <span class="mf">1.1</span><span class="p">;</span>
   <span class="p">}</span>
 <span class="o">&lt;</span><span class="err">/script&gt;</span>

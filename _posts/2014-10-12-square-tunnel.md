@@ -10,14 +10,18 @@ tags:
 <script type="text/paperscript" canvas="canvas-0010">
   var i = 1;
   var color = 'dark';
-  while (i < view.size.width * 1.5) {
+  while (i < view.size.width / 2) {
     var rect = new Rectangle({
                   center: view.center,
-                  size: i
+                  size: i * 1.5
                 });
     var path = new Path.Rectangle(rect);
     path.strokeWidth = 0.2 * i;
-    path.rotate((view.size.width - i) * 0.17);
+
+    // I tried to rotate the furthest away and nearest squares for a
+    // a nice twisting effect, but the furthest away squares are so
+    // small that they aren't even visible.
+    path.rotate(Math.pow(Math.abs(i - view.size.width/2), 2) * 0.0008);
 
     if (color == 'dark') {
       path.strokeColor = '#111111';
@@ -27,6 +31,7 @@ tags:
       path.strokeColor = '#ffffff';
       color = 'dark';
     }
+    // Simulate perspective with top squares appearing closer
     i *= 1.1;
   }
 </script>
