@@ -55,7 +55,7 @@ tags:
           stops: [['#aaaaaa', 0.1], ['#3f3f3f', 0.5], ['#222222', 1]],
           radial: true
       },
-      origin: center.bounds.topCenter + [0, 30],
+      origin: center.bounds.topCenter + [0, wooferSize * 0.1],
       destination: center.bounds.rightCenter
   };
 
