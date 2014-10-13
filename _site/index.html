@@ -20,6 +20,163 @@
 
   
   <div class="post">
+    <script type="text/paperscript" canvas="canvas-0011">
+  var wooferSize = view.size.height * 0.4;
+
+  var outerRing = new Path.Circle({
+    center: view.center,
+    radius: wooferSize *= 1.1,
+    fillColor: '#111111'
+  });
+
+  var cone = new Path.Circle({
+    center: view.center,
+    radius: wooferSize * 0.97
+  });
+
+  cone.fillColor = {
+      gradient: {
+          stops: [['#1d1d1d', 0.3 ], ['#444444', 1]],
+          radial: true
+      },
+      origin: cone.bounds.topCenter + [0, 30],
+      destination: cone.bounds.rightCenter
+  };
+
+  var centerRing = new Path.Circle({
+    center: view.center,
+    radius: wooferSize / 3
+  });
+
+  centerRing.fillColor = {
+      gradient: {
+          stops: [['#444444', 0.3 ], ['#111111', 1]],
+          radial: true
+      },
+      origin: centerRing.bounds.topCenter + [0, 30],
+      destination: centerRing.bounds.rightCenter
+  };
+
+  var center = new Path.Circle({
+    center: view.center,
+    radius: wooferSize / 3.2
+  });
+
+  center.fillColor = {
+      gradient: {
+          stops: [['#aaaaaa', 0.1], ['#3f3f3f', 0.5], ['#222222', 1]],
+          radial: true
+      },
+      origin: center.bounds.topCenter + [0, 30],
+      destination: center.bounds.rightCenter
+  };
+
+  // Build the woofer group
+  var woofer = new Group(cone, centerRing, center);
+  var wooferBounds = woofer.bounds;
+  var frameCount = 0;
+
+  function onFrame(event) {
+    // 60 fps, so hit a bass note every 2/3 of a
+    // second or 90 bpm
+    if (frameCount++ == 40) {
+      woofer.scale(1.04);
+      frameCount = 0;
+    }
+    else if (event.count % 2) {
+      woofer.fitBounds(wooferBounds);
+    }
+    else {
+      woofer.scale(1.005, woofer.center);
+    }
+  }
+</script>
+
+<canvas id="canvas-0011" height="250"></canvas>
+
+    <a href="/pixelbits/2014/10/13/animated-woofer.html" class="post-date">13 Oct 2014</a>
+    <p class="post-description">
+      Animated woofer. The frequency is so low you probably can't even hear it. <a href="#" class="js-show-code">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0011&quot;</span><span class="o">&gt;</span>
+  <span class="kd">var</span> <span class="nx">wooferSize</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="mf">0.4</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">outerRing</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
+    <span class="nx">center</span><span class="o">:</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">wooferSize</span> <span class="o">*=</span> <span class="mf">1.1</span><span class="p">,</span>
+    <span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;#111111&#39;</span>
+  <span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">cone</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
+    <span class="nx">center</span><span class="o">:</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">wooferSize</span> <span class="o">*</span> <span class="mf">0.97</span>
+  <span class="p">});</span>
+
+  <span class="nx">cone</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">gradient</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">stops</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;#1d1d1d&#39;</span><span class="p">,</span> <span class="mf">0.3</span> <span class="p">],</span> <span class="p">[</span><span class="s1">&#39;#444444&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+          <span class="nx">radial</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nx">origin</span><span class="o">:</span> <span class="nx">cone</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">topCenter</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
+      <span class="nx">destination</span><span class="o">:</span> <span class="nx">cone</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">rightCenter</span>
+  <span class="p">};</span>
+
+  <span class="kd">var</span> <span class="nx">centerRing</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
+    <span class="nx">center</span><span class="o">:</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">wooferSize</span> <span class="o">/</span> <span class="mi">3</span>
+  <span class="p">});</span>
+
+  <span class="nx">centerRing</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">gradient</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">stops</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;#444444&#39;</span><span class="p">,</span> <span class="mf">0.3</span> <span class="p">],</span> <span class="p">[</span><span class="s1">&#39;#111111&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+          <span class="nx">radial</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nx">origin</span><span class="o">:</span> <span class="nx">centerRing</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">topCenter</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
+      <span class="nx">destination</span><span class="o">:</span> <span class="nx">centerRing</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">rightCenter</span>
+  <span class="p">};</span>
+
+  <span class="kd">var</span> <span class="nx">center</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
+    <span class="nx">center</span><span class="o">:</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">wooferSize</span> <span class="o">/</span> <span class="mf">3.2</span>
+  <span class="p">});</span>
+
+  <span class="nx">center</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">gradient</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">stops</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;#aaaaaa&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;#3f3f3f&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;#222222&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+          <span class="nx">radial</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nx">origin</span><span class="o">:</span> <span class="nx">center</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">topCenter</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
+      <span class="nx">destination</span><span class="o">:</span> <span class="nx">center</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">rightCenter</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Build the woofer group</span>
+  <span class="kd">var</span> <span class="nx">woofer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Group</span><span class="p">(</span><span class="nx">cone</span><span class="p">,</span> <span class="nx">centerRing</span><span class="p">,</span> <span class="nx">center</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">wooferBounds</span> <span class="o">=</span> <span class="nx">woofer</span><span class="p">.</span><span class="nx">bounds</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">frameCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nx">onFrame</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 60 fps, so hit a bass note every 2/3 of a</span>
+    <span class="c1">// second or 90 bpm</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">frameCount</span><span class="o">++</span> <span class="o">==</span> <span class="mi">40</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">woofer</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="mf">1.04</span><span class="p">);</span>
+      <span class="nx">frameCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">count</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">woofer</span><span class="p">.</span><span class="nx">fitBounds</span><span class="p">(</span><span class="nx">wooferBounds</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">woofer</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="mf">1.005</span><span class="p">,</span> <span class="nx">woofer</span><span class="p">.</span><span class="nx">center</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0011&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
     <script type="text/paperscript" canvas="canvas-0010">
   var i = 1;
   var color = 'dark';
