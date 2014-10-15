@@ -75,7 +75,7 @@ tags:
       woofer.fitBounds(wooferBounds);
     }
     else {
-      woofer.scale(1.005, woofer.center);
+      woofer.scale(1.02, woofer.center);
     }
   }
 </script>
