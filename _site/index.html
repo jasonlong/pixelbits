@@ -43,21 +43,21 @@
 
       switch (getRandomInt(0, 3)) {
         case 0:
-            newArc.rotate(0);
-            break;
+          newArc.rotate(0);
+          break;
         case 1:
-            newArc.rotate(90);
-            break;
+          newArc.rotate(90);
+          break;
         case 2:
-            newArc.rotate(180);
-            break;
+          newArc.rotate(180);
+          break;
         case 3:
-            newArc.rotate(270);
+          newArc.rotate(270);
       }
 
       opacity = getRandomInt(40, 95);
       if (opacity < 45) {
-          opacity = 0;
+        opacity = 0;
       }
       newArc.fillColor.alpha = opacity/100;
     }
@@ -103,21 +103,21 @@
 
       <span class="k">switch</span> <span class="p">(</span><span class="nx">getRandomInt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="p">{</span>
         <span class="k">case</span> <span class="mi">0</span><span class="o">:</span>
-            <span class="nx">newArc</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
-            <span class="k">break</span><span class="p">;</span>
+          <span class="nx">newArc</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">0</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
         <span class="k">case</span> <span class="mi">1</span><span class="o">:</span>
-            <span class="nx">newArc</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span>
-            <span class="k">break</span><span class="p">;</span>
+          <span class="nx">newArc</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">90</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
         <span class="k">case</span> <span class="mi">2</span><span class="o">:</span>
-            <span class="nx">newArc</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">180</span><span class="p">);</span>
-            <span class="k">break</span><span class="p">;</span>
+          <span class="nx">newArc</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">180</span><span class="p">);</span>
+          <span class="k">break</span><span class="p">;</span>
         <span class="k">case</span> <span class="mi">3</span><span class="o">:</span>
-            <span class="nx">newArc</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">270</span><span class="p">);</span>
+          <span class="nx">newArc</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">270</span><span class="p">);</span>
       <span class="p">}</span>
 
       <span class="nx">opacity</span> <span class="o">=</span> <span class="nx">getRandomInt</span><span class="p">(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">95</span><span class="p">);</span>
       <span class="k">if</span> <span class="p">(</span><span class="nx">opacity</span> <span class="o">&lt;</span> <span class="mi">45</span><span class="p">)</span> <span class="p">{</span>
-          <span class="nx">opacity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="nx">opacity</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
       <span class="p">}</span>
       <span class="nx">newArc</span><span class="p">.</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="nx">opacity</span><span class="o">/</span><span class="mi">100</span><span class="p">;</span>
     <span class="p">}</span>
