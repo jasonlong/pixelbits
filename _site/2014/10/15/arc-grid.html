@@ -21,10 +21,12 @@
 <div class="post">
   <script type="text/paperscript" canvas="canvas-0012">
   view.element.style.backgroundColor = '#85144b';
-
   arcSize = view.size.height / 12;
+
+  // Start with a circle...
   var arc = new Path.Circle(new Point(100, 70), arcSize);
 
+  // And trim it down to a quarter circle.
   arc.removeSegment(3);
   arc.segments[0].handleIn.y = 0;
   arc.segments[1].handleOut.x = 0;
@@ -77,10 +79,12 @@
   
 <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0012&quot;</span><span class="o">&gt;</span>
   <span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;#85144b&#39;</span><span class="p">;</span>
-
   <span class="nx">arcSize</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">12</span><span class="p">;</span>
+
+  <span class="c1">// Start with a circle...</span>
   <span class="kd">var</span> <span class="nx">arc</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">70</span><span class="p">),</span> <span class="nx">arcSize</span><span class="p">);</span>
 
+  <span class="c1">// And trim it down to a quarter circle.</span>
   <span class="nx">arc</span><span class="p">.</span><span class="nx">removeSegment</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>
   <span class="nx">arc</span><span class="p">.</span><span class="nx">segments</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">handleIn</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
   <span class="nx">arc</span><span class="p">.</span><span class="nx">segments</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">handleOut</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
