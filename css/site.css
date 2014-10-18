@@ -84,3 +84,13 @@ code {
   background-color: #f9f9f9;
   padding: 10px;
 }
+
+.pagination a,
+.pagination strong,
+.pagination span {
+  margin-right: 6px;
+}
+
+.paginate-disabled {
+  color: #aaa;
+}

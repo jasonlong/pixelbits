@@ -1011,167 +1011,27 @@
     </div>
   </div>
 
-  <div class="post">
-    <script type="text/paperscript" canvas="canvas-0002">
 
-  var y = view.size.height / 2;
-  var width = view.size.width * 0.9;
-  var vector = new Point({
-        angle: 45,
-        length: width / 5
-        });
-  var offset = width / 30;
 
-  for (var i = 0; i < 40; i+=3) {
-    var path = new Path();
-    vector.length += i;
-    path.segments = [
-      [[offset, y], null, vector.rotate(-90-i)],
-      [[width / 2, y], vector.rotate(-180+i), vector.rotate(i)],
-      [[width - offset, y], vector.rotate(90-i), null]
-    ];
-    path.strokeColor = '#0074d9';
-  }
+<div class="pagination">
+  
+    <span class="paginate-disabled">&laquo; Prev</span>
+  
 
-  project.activeLayer.position = view.center;
-</script>
+  
+    
+      <strong>1</strong>
+    
+  
+    
+      <a href="/pixelbits/page2">2</a>
+    
+  
 
-<canvas id="canvas-0002" height="300"></canvas>
-
-    <a href="/pixelbits/2014/09/28/sine-waves.html" class="post-date">28 Sep 2014</a>
-    <p class="post-description">
-      Sine waves made by manipulating bezier handles. <a href="#" class="js-show-code">Show code</a>
-    </p>
-
-    <div class="code">
-      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0002&quot;</span><span class="o">&gt;</span>
-
-  <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">vector</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">({</span>
-        <span class="nx">angle</span><span class="o">:</span> <span class="mi">45</span><span class="p">,</span>
-        <span class="nx">length</span><span class="o">:</span> <span class="nx">width</span> <span class="o">/</span> <span class="mi">5</span>
-        <span class="p">});</span>
-  <span class="kd">var</span> <span class="nx">offset</span> <span class="o">=</span> <span class="nx">width</span> <span class="o">/</span> <span class="mi">30</span><span class="p">;</span>
-
-  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">40</span><span class="p">;</span> <span class="nx">i</span><span class="o">+=</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">();</span>
-    <span class="nx">vector</span><span class="p">.</span><span class="nx">length</span> <span class="o">+=</span> <span class="nx">i</span><span class="p">;</span>
-    <span class="nx">path</span><span class="p">.</span><span class="nx">segments</span> <span class="o">=</span> <span class="p">[</span>
-      <span class="p">[[</span><span class="nx">offset</span><span class="p">,</span> <span class="nx">y</span><span class="p">],</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">vector</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="o">-</span><span class="nx">i</span><span class="p">)],</span>
-      <span class="p">[[</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">y</span><span class="p">],</span> <span class="nx">vector</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="o">+</span><span class="nx">i</span><span class="p">),</span> <span class="nx">vector</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">i</span><span class="p">)],</span>
-      <span class="p">[[</span><span class="nx">width</span> <span class="o">-</span> <span class="nx">offset</span><span class="p">,</span> <span class="nx">y</span><span class="p">],</span> <span class="nx">vector</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">90</span><span class="o">-</span><span class="nx">i</span><span class="p">),</span> <span class="kc">null</span><span class="p">]</span>
-    <span class="p">];</span>
-    <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="s1">&#39;#0074d9&#39;</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
-
-<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0002&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;300&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
-    </div>
-  </div>
-
-  <div class="post">
-    <script type="text/paperscript" canvas="canvas-0001">
-  var raster = new Raster('/pixelbits/assets/starry-night.jpg');
-
-  // Hide the original image
-  raster.visible = false;
-
-  var gridSize = 13;
-
-  // Space the cells by 120%:
-  var spacing = 1.2;
-
-  // As the web is asynchronous, we need to wait for the raster to load
-  // before we can perform any operation on its pixels.
-  raster.on('load', function() {
-    // Resize image to a manageable size
-    raster.size = new Size(50, 32);
-
-    for (var y = 0; y < raster.height; y++) {
-      for(var x = 0; x < raster.width; x++) {
-        // Get the color of the pixel:
-        var color = raster.getPixel(x, y);
-
-        // Create a circle shaped path:
-        var path = new Path.Circle({
-          center: new Point(x, y) * gridSize,
-          radius: gridSize / 2 / spacing
-        });
-
-        // Set the fill color of the path to the color
-        // of the pixel:
-        path.fillColor = color;
-      }
-    }
-
-    // Move the active layer to the center of the view, so all
-    // the created paths in it appear centered.
-    project.activeLayer.position = view.center;
-  });
-
-  // Move the active layer to the center of the view:
-  project.activeLayer.position = view.center;
-
-</script>
-
-<canvas id="canvas-0001"></canvas>
-
-    <a href="/pixelbits/2014/09/27/raster-circles.html" class="post-date">27 Sep 2014</a>
-    <p class="post-description">
-      Getting colors from raster image. Basically copied from the Paper.js Mona Lisa example. <a href="#" class="js-show-code">Show code</a>
-    </p>
-
-    <div class="code">
-      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0001&quot;</span><span class="o">&gt;</span>
-  <span class="kd">var</span> <span class="nx">raster</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Raster</span><span class="p">(</span><span class="s1">&#39;/pixelbits/assets/starry-night.jpg&#39;</span><span class="p">);</span>
-
-  <span class="c1">// Hide the original image</span>
-  <span class="nx">raster</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-
-  <span class="kd">var</span> <span class="nx">gridSize</span> <span class="o">=</span> <span class="mi">13</span><span class="p">;</span>
-
-  <span class="c1">// Space the cells by 120%:</span>
-  <span class="kd">var</span> <span class="nx">spacing</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">;</span>
-
-  <span class="c1">// As the web is asynchronous, we need to wait for the raster to load</span>
-  <span class="c1">// before we can perform any operation on its pixels.</span>
-  <span class="nx">raster</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// Resize image to a manageable size</span>
-    <span class="nx">raster</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">32</span><span class="p">);</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">raster</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">raster</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Get the color of the pixel:</span>
-        <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">raster</span><span class="p">.</span><span class="nx">getPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-
-        <span class="c1">// Create a circle shaped path:</span>
-        <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
-          <span class="nx">center</span><span class="o">:</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">*</span> <span class="nx">gridSize</span><span class="p">,</span>
-          <span class="nx">radius</span><span class="o">:</span> <span class="nx">gridSize</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">/</span> <span class="nx">spacing</span>
-        <span class="p">});</span>
-
-        <span class="c1">// Set the fill color of the path to the color</span>
-        <span class="c1">// of the pixel:</span>
-        <span class="nx">path</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Move the active layer to the center of the view, so all</span>
-    <span class="c1">// the created paths in it appear centered.</span>
-    <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
-  <span class="p">});</span>
-
-  <span class="c1">// Move the active layer to the center of the view:</span>
-  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
-
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
-
-<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0001&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
-    </div>
-  </div>
+  
+    <a href="/pixelbits/page2">Next &raquo;</a>
+  
+</div>
 
 
     </div>
