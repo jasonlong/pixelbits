@@ -13,7 +13,7 @@ tags:
 
   var NUM_PARTICLES  = 100;
   var EMITTER_X      = view.size.width / 2;
-  var EMITTER_Y      = view.size.height - 100;
+  var EMITTER_Y      = view.size.height - view.size.height * 0.2;
   var MIN_SIZE       = 1.5;
   var MAX_SIZE       = 2.5;
   var MIN_VELOCITY_Y = 0.2;
