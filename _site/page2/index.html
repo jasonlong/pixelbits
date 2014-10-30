@@ -20,6 +20,71 @@
 
   
   <div class="post">
+    <script type="text/paperscript" canvas="canvas-0003">
+  view.element.style.backgroundColor = '#111111';
+
+  var y = view.size.height / 2;
+  var width = view.size.width * 0.9;
+  var vector = new Point({
+        angle: 45,
+        length: width / 5
+        });
+  var offset = width / 30;
+  var color = new Color('#0074d9')
+
+  for (var i = 0; i < 40; i+=3) {
+    var path = new Path();
+    vector.length += i;
+    path.segments = [
+      [[offset, y], null, vector.rotate(-90-i)],
+      [[width / 2, y], vector.rotate(-180+i), vector.rotate(i)],
+      [[width - offset, y], vector.rotate(90-i), null]
+    ];
+    path.strokeColor = color;
+    path.strokeColor.hue += i * 10;
+  }
+  project.activeLayer.position = view.center;
+</script>
+
+<canvas id="canvas-0003" height="300"></canvas>
+
+    <a href="/pixelbits/2014/09/29/sine-waves-hue-shifting.html" class="post-date">29 Sep 2014</a>
+    <p class="post-description">
+      Shifting hues using yesterday's sine wave. <a href="#" class="js-show-code">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0003&quot;</span><span class="o">&gt;</span>
+  <span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;#111111&#39;</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">vector</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">({</span>
+        <span class="nx">angle</span><span class="o">:</span> <span class="mi">45</span><span class="p">,</span>
+        <span class="nx">length</span><span class="o">:</span> <span class="nx">width</span> <span class="o">/</span> <span class="mi">5</span>
+        <span class="p">});</span>
+  <span class="kd">var</span> <span class="nx">offset</span> <span class="o">=</span> <span class="nx">width</span> <span class="o">/</span> <span class="mi">30</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;#0074d9&#39;</span><span class="p">)</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">40</span><span class="p">;</span> <span class="nx">i</span><span class="o">+=</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">();</span>
+    <span class="nx">vector</span><span class="p">.</span><span class="nx">length</span> <span class="o">+=</span> <span class="nx">i</span><span class="p">;</span>
+    <span class="nx">path</span><span class="p">.</span><span class="nx">segments</span> <span class="o">=</span> <span class="p">[</span>
+      <span class="p">[[</span><span class="nx">offset</span><span class="p">,</span> <span class="nx">y</span><span class="p">],</span> <span class="kc">null</span><span class="p">,</span> <span class="nx">vector</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">90</span><span class="o">-</span><span class="nx">i</span><span class="p">)],</span>
+      <span class="p">[[</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">y</span><span class="p">],</span> <span class="nx">vector</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="o">+</span><span class="nx">i</span><span class="p">),</span> <span class="nx">vector</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">i</span><span class="p">)],</span>
+      <span class="p">[[</span><span class="nx">width</span> <span class="o">-</span> <span class="nx">offset</span><span class="p">,</span> <span class="nx">y</span><span class="p">],</span> <span class="nx">vector</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">90</span><span class="o">-</span><span class="nx">i</span><span class="p">),</span> <span class="kc">null</span><span class="p">]</span>
+    <span class="p">];</span>
+    <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+    <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="nx">i</span> <span class="o">*</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0003&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;300&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
     <script type="text/paperscript" canvas="canvas-0002">
 
   var y = view.size.height / 2;
