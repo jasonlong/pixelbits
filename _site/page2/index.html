@@ -20,6 +20,163 @@
 
   
   <div class="post">
+    <script type="text/paperscript" canvas="canvas-0004">
+  view.element.style.backgroundColor = '#111111';
+
+  var color = new Color('#0074d9');
+  var strokeWidth = view.size.height * 0.04;
+
+  var c = view.size.height / 3;
+  var a = c/2;
+  var b = Math.sin(60 * Math.PI / 180) * c;
+
+  path = new Path.Line([0, b], [a, 0]);
+  var color1 = color.clone();
+  var color2 = color.clone();
+  color2.hue += 60;
+  var gradient = new Gradient([color1, color2]);
+  path.strokeColor = new Color(gradient, [0, b], [a, 0]);
+  path.strokeWidth = strokeWidth;
+  path.strokeCap = 'round';
+
+  path = new Path.Line([a, 0], [a+c, 0]);
+  var color1 = color.clone();
+  var color2 = color.clone();
+  color1.hue += 60;
+  color2.hue += 120;
+  var gradient = new Gradient([color1, color2]);
+  path.strokeColor = new Color(gradient, [a, 0], [a+c, 0]);
+  path.strokeWidth = strokeWidth;
+  path.strokeCap = 'round';
+
+  path = new Path.Line([a+c, 0], [2*c, b]);
+  var color1 = color.clone();
+  var color2 = color.clone();
+  color1.hue += 120;
+  color2.hue += 180;
+  var gradient = new Gradient([color1, color2]);
+  path.strokeColor = new Color(gradient, [a+c, 0], [2*c, b]);
+  path.strokeWidth = strokeWidth;
+  path.strokeCap = 'round';
+
+  path = new Path.Line([2*c, b], [a+c, 2*b]);
+  var color1 = color.clone();
+  var color2 = color.clone();
+  color1.hue += 180;
+  color2.hue += 240;
+  var gradient = new Gradient([color1, color2]);
+  path.strokeColor = new Color(gradient, [2*c, b], [a+c, 2*b]);
+  path.strokeWidth = strokeWidth;
+  path.strokeCap = 'round';
+
+  path = new Path.Line([a+c, 2*b], [a, 2*b]);
+  var color1 = color.clone();
+  var color2 = color.clone();
+  color1.hue += 240;
+  color2.hue += 300;
+  var gradient = new Gradient([color1, color2]);
+  path.strokeColor = new Color(gradient, [a+c, 2*b], [a, 2*b]);
+  path.strokeWidth = strokeWidth;
+  path.strokeCap = 'round';
+
+  path = new Path.Line([a, 2*b], [0, b]);
+  var color1 = color.clone();
+  var color2 = color.clone();
+  color1.hue += 300;
+  color2.hue += 360;
+  var gradient = new Gradient([color1, color2]);
+  path.strokeColor = new Color(gradient, [a, 2*b], [0, b]);
+  path.strokeWidth = strokeWidth;
+  path.strokeCap = 'round';
+
+  project.activeLayer.position = view.center;
+</script>
+
+<canvas id="canvas-0004"></canvas>
+
+    <a href="/pixelbits/2014/09/30/gradient-hexagon.html" class="post-date">30 Sep 2014</a>
+    <p class="post-description">
+      Overly verbose code for a continuous gradient hexagon. <a href="#" class="js-show-code">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0004&quot;</span><span class="o">&gt;</span>
+  <span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;#111111&#39;</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;#0074d9&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="mf">0.04</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">c</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="nx">c</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">b</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="mi">60</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span> <span class="o">/</span> <span class="mi">180</span><span class="p">)</span> <span class="o">*</span> <span class="nx">c</span><span class="p">;</span>
+
+  <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">]);</span>
+  <span class="kd">var</span> <span class="nx">color1</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="nx">color2</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">60</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">gradient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gradient</span><span class="p">([</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="nx">gradient</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">strokeWidth</span><span class="p">;</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeCap</span> <span class="o">=</span> <span class="s1">&#39;round&#39;</span><span class="p">;</span>
+
+  <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="nx">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">]);</span>
+  <span class="kd">var</span> <span class="nx">color1</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="nx">color1</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">60</span><span class="p">;</span>
+  <span class="nx">color2</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">120</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">gradient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gradient</span><span class="p">([</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="nx">gradient</span><span class="p">,</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">strokeWidth</span><span class="p">;</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeCap</span> <span class="o">=</span> <span class="s1">&#39;round&#39;</span><span class="p">;</span>
+
+  <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="nx">c</span><span class="p">,</span> <span class="nx">b</span><span class="p">]);</span>
+  <span class="kd">var</span> <span class="nx">color1</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="nx">color1</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">120</span><span class="p">;</span>
+  <span class="nx">color2</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">180</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">gradient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gradient</span><span class="p">([</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="nx">gradient</span><span class="p">,</span> <span class="p">[</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="nx">c</span><span class="p">,</span> <span class="nx">b</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">strokeWidth</span><span class="p">;</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeCap</span> <span class="o">=</span> <span class="s1">&#39;round&#39;</span><span class="p">;</span>
+
+  <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="mi">2</span><span class="o">*</span><span class="nx">c</span><span class="p">,</span> <span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">]);</span>
+  <span class="kd">var</span> <span class="nx">color1</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="nx">color1</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">180</span><span class="p">;</span>
+  <span class="nx">color2</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">240</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">gradient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gradient</span><span class="p">([</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="nx">gradient</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="o">*</span><span class="nx">c</span><span class="p">,</span> <span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">strokeWidth</span><span class="p">;</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeCap</span> <span class="o">=</span> <span class="s1">&#39;round&#39;</span><span class="p">;</span>
+
+  <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">]);</span>
+  <span class="kd">var</span> <span class="nx">color1</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="nx">color1</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">240</span><span class="p">;</span>
+  <span class="nx">color2</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">300</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">gradient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gradient</span><span class="p">([</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="nx">gradient</span><span class="p">,</span> <span class="p">[</span><span class="nx">a</span><span class="o">+</span><span class="nx">c</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">strokeWidth</span><span class="p">;</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeCap</span> <span class="o">=</span> <span class="s1">&#39;round&#39;</span><span class="p">;</span>
+
+  <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">([</span><span class="nx">a</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nx">b</span><span class="p">]);</span>
+  <span class="kd">var</span> <span class="nx">color1</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">color2</span> <span class="o">=</span> <span class="nx">color</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+  <span class="nx">color1</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">300</span><span class="p">;</span>
+  <span class="nx">color2</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">360</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">gradient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Gradient</span><span class="p">([</span><span class="nx">color1</span><span class="p">,</span> <span class="nx">color2</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="nx">gradient</span><span class="p">,</span> <span class="p">[</span><span class="nx">a</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="nx">b</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nx">b</span><span class="p">]);</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeWidth</span> <span class="o">=</span> <span class="nx">strokeWidth</span><span class="p">;</span>
+  <span class="nx">path</span><span class="p">.</span><span class="nx">strokeCap</span> <span class="o">=</span> <span class="s1">&#39;round&#39;</span><span class="p">;</span>
+
+  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0004&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
     <script type="text/paperscript" canvas="canvas-0003">
   view.element.style.backgroundColor = '#111111';
 

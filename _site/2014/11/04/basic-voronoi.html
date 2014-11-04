@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Pixelbits by Jason Long</title>
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="/pixelbits/css/normalize.css">
+    <link rel="stylesheet" href="/pixelbits/css/syntax.css">
+    <link rel="stylesheet" href="/pixelbits/css/site.css">
+    <script src="/pixelbits/js/paper-full.min.js"></script>
+    <script src="/pixelbits/js/zepto.min.js"></script>
+    <script src="/pixelbits/js/site.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="site-name"><a href="/pixelbits">Pixelbits</a></h1>
+      <p class="lead">Hi, I'm <a href="http://twitter.com/jasonlong">@jasonlong</a>. I'm trying to make a small creative coding sketch every day(ish) to learn new things.</p>
+
+<div class="post">
+  <script src="../../../js/rhill-voronoi-core.min.js"></script>
+<script type="text/paperscript" canvas="canvas-0014">
+  var voronoi =  new Voronoi();
+
+  var bbox = {
+    xl: 0,
+    xr: view.bounds.width,
+    yt: 0,
+    yb: view.bounds.height
+  };
+
+  var sites       = generateRandomPoints(70);
+  var diagram     = voronoi.compute(sites, bbox);
+  var baseColor   = new Color('#3d9970');
+  var strokeColor = new Color(0, 0, 0, 0.2);
+
+  if (diagram) {
+    for (var i = 0, l = sites.length; i < l; i++) {
+	    var cell = diagram.cells[sites[i].voronoiId];
+        if (cell) {
+          var halfedges = cell.halfedges,
+          length = halfedges.length;
+        if (length > 2) {
+          var points = [];
+          for (var j = 0; j < length; j++) {
+            v = halfedges[j].getEndpoint();
+            points.push(new Point(v));
+          }
+          createPath(points);
+        }
+      }
+    }
+  }
+
+  function generateRandomPoints(count) {
+    var points = [];
+    for (var i=0; i<count; i++) {
+      x = getRandomInt(0, view.size.width);
+      y = getRandomInt(0, view.size.height);
+      points[i] = {'x':x, 'y':y};
+    }
+    return points;
+  }
+
+  function createPath(points) {
+    var path = new Path();
+    path.fillColor = generateColor(baseColor);
+    path.strokeColor = strokeColor;
+    path.closed = true;
+
+    for (var i=0, l=points.length; i < l; i++) {
+      path.add(points[i]);
+    }
+    return path;
+  }
+
+  function generateColor(baseColor) {
+    var newColor = baseColor;
+    var adjustment = getRandomInt(0, 10);
+    newColor.brightness += adjustment / 1000;
+    return newColor;
+  }
+
+  function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
+</script>
+
+<canvas id="canvas-0014"></canvas>
+
+  <span class="post-date">04 Nov 2014</span>
+  <p class="post-description">An initial experiment with <a href="http://en.wikipedia.org/wiki/Voronoi_diagram">Voronoi diagrams</a>. The points for the cells are randomly generated and each cell has a random color brightness applied.</p>
+
+  
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;../../../js/rhill-voronoi-core.min.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0014&quot;</span><span class="o">&gt;</span>
+  <span class="kd">var</span> <span class="nx">voronoi</span> <span class="o">=</span>  <span class="k">new</span> <span class="nx">Voronoi</span><span class="p">();</span>
+
+  <span class="kd">var</span> <span class="nx">bbox</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">xl</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">xr</span><span class="o">:</span> <span class="nx">view</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">width</span><span class="p">,</span>
+    <span class="nx">yt</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nx">yb</span><span class="o">:</span> <span class="nx">view</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">height</span>
+  <span class="p">};</span>
+
+  <span class="kd">var</span> <span class="nx">sites</span>       <span class="o">=</span> <span class="nx">generateRandomPoints</span><span class="p">(</span><span class="mi">70</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">diagram</span>     <span class="o">=</span> <span class="nx">voronoi</span><span class="p">.</span><span class="nx">compute</span><span class="p">(</span><span class="nx">sites</span><span class="p">,</span> <span class="nx">bbox</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">baseColor</span>   <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;#3d9970&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">strokeColor</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">);</span>
+
+  <span class="k">if</span> <span class="p">(</span><span class="nx">diagram</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">sites</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+	    <span class="kd">var</span> <span class="nx">cell</span> <span class="o">=</span> <span class="nx">diagram</span><span class="p">.</span><span class="nx">cells</span><span class="p">[</span><span class="nx">sites</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">voronoiId</span><span class="p">];</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">cell</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">halfedges</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">.</span><span class="nx">halfedges</span><span class="p">,</span>
+          <span class="nx">length</span> <span class="o">=</span> <span class="nx">halfedges</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">length</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="p">[];</span>
+          <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">v</span> <span class="o">=</span> <span class="nx">halfedges</span><span class="p">[</span><span class="nx">j</span><span class="p">].</span><span class="nx">getEndpoint</span><span class="p">();</span>
+            <span class="nx">points</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">v</span><span class="p">));</span>
+          <span class="p">}</span>
+          <span class="nx">createPath</span><span class="p">(</span><span class="nx">points</span><span class="p">);</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+
+  <span class="kd">function</span> <span class="nx">generateRandomPoints</span><span class="p">(</span><span class="nx">count</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="p">[];</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">count</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">x</span> <span class="o">=</span> <span class="nx">getRandomInt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span><span class="p">);</span>
+      <span class="nx">y</span> <span class="o">=</span> <span class="nx">getRandomInt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span><span class="p">);</span>
+      <span class="nx">points</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;x&#39;</span><span class="o">:</span><span class="nx">x</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="o">:</span><span class="nx">y</span><span class="p">};</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">points</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">function</span> <span class="nx">createPath</span><span class="p">(</span><span class="nx">points</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">();</span>
+    <span class="nx">path</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">generateColor</span><span class="p">(</span><span class="nx">baseColor</span><span class="p">);</span>
+    <span class="nx">path</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">strokeColor</span><span class="p">;</span>
+    <span class="nx">path</span><span class="p">.</span><span class="nx">closed</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="nx">l</span><span class="o">=</span><span class="nx">points</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">path</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">points</span><span class="p">[</span><span class="nx">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">path</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">function</span> <span class="nx">generateColor</span><span class="p">(</span><span class="nx">baseColor</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">newColor</span> <span class="o">=</span> <span class="nx">baseColor</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">adjustment</span> <span class="o">=</span> <span class="nx">getRandomInt</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">);</span>
+    <span class="nx">newColor</span><span class="p">.</span><span class="nx">brightness</span> <span class="o">+=</span> <span class="nx">adjustment</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">;</span>
+    <span class="k">return</span> <span class="nx">newColor</span><span class="p">;</span>
+  <span class="p">}</span>
+
+  <span class="kd">function</span> <span class="nx">getRandomInt</span><span class="p">(</span><span class="nx">min</span><span class="p">,</span> <span class="nx">max</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="p">(</span><span class="nx">max</span> <span class="o">-</span> <span class="nx">min</span><span class="p">))</span> <span class="o">+</span> <span class="nx">min</span><span class="p">;</span>
+  <span class="p">}</span>
+
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0014&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+
+</div>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49925874-2', 'auto');
+      ga('send', 'pageview');
+  </script>
+  </body>
+</html>
+
