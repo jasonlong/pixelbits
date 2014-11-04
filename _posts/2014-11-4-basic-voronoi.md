@@ -8,7 +8,7 @@ tags:
   - random
   - voronoi
 ---
-<script src="../../../js/rhill-voronoi-core.min.js"></script>
+<script src="/pixelbits/js/rhill-voronoi-core.min.js"></script>
 <script type="text/paperscript" canvas="canvas-0014">
   var voronoi =  new Voronoi();
 
