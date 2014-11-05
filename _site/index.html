@@ -22,6 +22,169 @@
   <div class="post">
     <script src="/pixelbits/js/rhill-voronoi-core.min.js"></script>
 
+<script type="text/paperscript" canvas="canvas-0015">
+  // Colors from http://clrs.cc/
+  var colors = ['#0074d9', '#01ff70', '#f012be', '#ff851b', '#ffdc00'];
+  var perRow = 10;
+  var spriteSize = 5;
+  // leave room for side gutters and spacing in between
+  var pixelSize = view.size.width / ((perRow + 2) + (perRow / 2)) / 5;
+  var marginSize = spriteSize * pixelSize / 2;
+
+  view.element.style.backgroundColor = '#111';
+
+  for (y = 0; y < colors.length; y++) {
+      identicon = generateIdenticon(pixelSize, spriteSize);
+      identicon.fillColor = colors[y];
+      identicon.shadowColor = colors[y];
+      identicon.shadowBlur = 25;
+
+      for (x = 0; x < perRow; x++) {
+          newIdenticon = identicon.clone();
+          newIdenticon.position.x = x * ((pixelSize * spriteSize) + marginSize);
+          newIdenticon.position.y = y * ((pixelSize * spriteSize) + marginSize);
+      }
+      identicon.remove();
+  }
+
+  project.activeLayer.position = view.center;
+
+  // build ship
+  var ship = new Group();
+  var base = new Rectangle(
+                  new Point(view.size.width / 2, view.size.height - pixelSize * 5),
+                  new Size(pixelSize * 5, pixelSize));
+  var turret = new Rectangle(
+                  new Point(view.size.width / 2 + (pixelSize * 2), view.size.height - pixelSize * 6),
+                  new Size(pixelSize, pixelSize * 2));
+
+  ship.addChildren([new Shape.Rectangle(base), new Shape.Rectangle(turret)]);
+  ship.fillColor = '#eee';
+
+  function generateIdenticon(pixelSize, spriteSize) {
+      var identicon = new Group();
+      var halfAxis = (spriteSize -1) / 2;
+      var i = 0;
+      var x = halfAxis * pixelSize;
+
+      while (x >= 0) {
+        var y = 0;
+        while (y < spriteSize * pixelSize) {
+          if (Math.floor(Math.random() * 100) % 2) {
+              var rect = new Rectangle(
+                  new Point(x, y),
+                  new Size(pixelSize, pixelSize));
+              var pixel = new Shape.Rectangle(rect);
+              identicon.addChild(pixel);
+
+              if (x != halfAxis * pixelSize) {
+                  xStart = 2 * halfAxis * pixelSize -x;
+                  var rect = new Rectangle(
+                      new Point(xStart, y),
+                      new Size(pixelSize, pixelSize));
+                  var pixel = new Shape.Rectangle(rect);
+                  identicon.addChild(pixel);
+              }
+          }
+          i += 1;
+          y += pixelSize;
+        }
+        x -= pixelSize;
+      }
+      return identicon;
+  }
+</script>
+
+<canvas id="canvas-0015" height="250"></canvas>
+
+    <a href="/pixelbits/2014/11/05/identicon-invaders.html" class="post-date">05 Nov 2014</a>
+    <p class="post-description">
+      This uses a similar algorithm to our GitHub identicons. The colors stay the same, but the identicon shapes are random each time this page loads. (BTW, if you're a GitHub user, did you know that everyone has an identicon – even if you use an avatar? Just swap in your user name in this URL <a href="https://github.com/identicons/jasonlong.png">https://github.com/identicons/jasonlong.png</a>. <a href="#" class="js-show-code">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;/pixelbits/js/rhill-voronoi-core.min.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0015&quot;</span><span class="o">&gt;</span>
+  <span class="c1">// Colors from http://clrs.cc/</span>
+  <span class="kd">var</span> <span class="nx">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;#0074d9&#39;</span><span class="p">,</span> <span class="s1">&#39;#01ff70&#39;</span><span class="p">,</span> <span class="s1">&#39;#f012be&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff851b&#39;</span><span class="p">,</span> <span class="s1">&#39;#ffdc00&#39;</span><span class="p">];</span>
+  <span class="kd">var</span> <span class="nx">perRow</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">spriteSize</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="c1">// leave room for side gutters and spacing in between</span>
+  <span class="kd">var</span> <span class="nx">pixelSize</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="p">((</span><span class="nx">perRow</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="nx">perRow</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="o">/</span> <span class="mi">5</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">marginSize</span> <span class="o">=</span> <span class="nx">spriteSize</span> <span class="o">*</span> <span class="nx">pixelSize</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+  <span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;#111&#39;</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">colors</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">identicon</span> <span class="o">=</span> <span class="nx">generateIdenticon</span><span class="p">(</span><span class="nx">pixelSize</span><span class="p">,</span> <span class="nx">spriteSize</span><span class="p">);</span>
+      <span class="nx">identicon</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">colors</span><span class="p">[</span><span class="nx">y</span><span class="p">];</span>
+      <span class="nx">identicon</span><span class="p">.</span><span class="nx">shadowColor</span> <span class="o">=</span> <span class="nx">colors</span><span class="p">[</span><span class="nx">y</span><span class="p">];</span>
+      <span class="nx">identicon</span><span class="p">.</span><span class="nx">shadowBlur</span> <span class="o">=</span> <span class="mi">25</span><span class="p">;</span>
+
+      <span class="k">for</span> <span class="p">(</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">perRow</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">newIdenticon</span> <span class="o">=</span> <span class="nx">identicon</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+          <span class="nx">newIdenticon</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="nx">x</span> <span class="o">*</span> <span class="p">((</span><span class="nx">pixelSize</span> <span class="o">*</span> <span class="nx">spriteSize</span><span class="p">)</span> <span class="o">+</span> <span class="nx">marginSize</span><span class="p">);</span>
+          <span class="nx">newIdenticon</span><span class="p">.</span><span class="nx">position</span><span class="p">.</span><span class="nx">y</span> <span class="o">=</span> <span class="nx">y</span> <span class="o">*</span> <span class="p">((</span><span class="nx">pixelSize</span> <span class="o">*</span> <span class="nx">spriteSize</span><span class="p">)</span> <span class="o">+</span> <span class="nx">marginSize</span><span class="p">);</span>
+      <span class="p">}</span>
+      <span class="nx">identicon</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+  <span class="p">}</span>
+
+  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+
+  <span class="c1">// build ship</span>
+  <span class="kd">var</span> <span class="nx">ship</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Group</span><span class="p">();</span>
+  <span class="kd">var</span> <span class="nx">base</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span>
+                  <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">-</span> <span class="nx">pixelSize</span> <span class="o">*</span> <span class="mi">5</span><span class="p">),</span>
+                  <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="nx">pixelSize</span> <span class="o">*</span> <span class="mi">5</span><span class="p">,</span> <span class="nx">pixelSize</span><span class="p">));</span>
+  <span class="kd">var</span> <span class="nx">turret</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span>
+                  <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="nx">pixelSize</span> <span class="o">*</span> <span class="mi">2</span><span class="p">),</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">-</span> <span class="nx">pixelSize</span> <span class="o">*</span> <span class="mi">6</span><span class="p">),</span>
+                  <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="nx">pixelSize</span><span class="p">,</span> <span class="nx">pixelSize</span> <span class="o">*</span> <span class="mi">2</span><span class="p">));</span>
+
+  <span class="nx">ship</span><span class="p">.</span><span class="nx">addChildren</span><span class="p">([</span><span class="k">new</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">base</span><span class="p">),</span> <span class="k">new</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">turret</span><span class="p">)]);</span>
+  <span class="nx">ship</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="s1">&#39;#eee&#39;</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nx">generateIdenticon</span><span class="p">(</span><span class="nx">pixelSize</span><span class="p">,</span> <span class="nx">spriteSize</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">identicon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Group</span><span class="p">();</span>
+      <span class="kd">var</span> <span class="nx">halfAxis</span> <span class="o">=</span> <span class="p">(</span><span class="nx">spriteSize</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">halfAxis</span> <span class="o">*</span> <span class="nx">pixelSize</span><span class="p">;</span>
+
+      <span class="k">while</span> <span class="p">(</span><span class="nx">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">while</span> <span class="p">(</span><span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">spriteSize</span> <span class="o">*</span> <span class="nx">pixelSize</span><span class="p">)</span> <span class="p">{</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+              <span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span>
+                  <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">),</span>
+                  <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="nx">pixelSize</span><span class="p">,</span> <span class="nx">pixelSize</span><span class="p">));</span>
+              <span class="kd">var</span> <span class="nx">pixel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span>
+              <span class="nx">identicon</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">pixel</span><span class="p">);</span>
+
+              <span class="k">if</span> <span class="p">(</span><span class="nx">x</span> <span class="o">!=</span> <span class="nx">halfAxis</span> <span class="o">*</span> <span class="nx">pixelSize</span><span class="p">)</span> <span class="p">{</span>
+                  <span class="nx">xStart</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="nx">halfAxis</span> <span class="o">*</span> <span class="nx">pixelSize</span> <span class="o">-</span><span class="nx">x</span><span class="p">;</span>
+                  <span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span>
+                      <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">xStart</span><span class="p">,</span> <span class="nx">y</span><span class="p">),</span>
+                      <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="nx">pixelSize</span><span class="p">,</span> <span class="nx">pixelSize</span><span class="p">));</span>
+                  <span class="kd">var</span> <span class="nx">pixel</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">rect</span><span class="p">);</span>
+                  <span class="nx">identicon</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">pixel</span><span class="p">);</span>
+              <span class="p">}</span>
+          <span class="p">}</span>
+          <span class="nx">i</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+          <span class="nx">y</span> <span class="o">+=</span> <span class="nx">pixelSize</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">x</span> <span class="o">-=</span> <span class="nx">pixelSize</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">return</span> <span class="nx">identicon</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0015&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
+    <script src="/pixelbits/js/rhill-voronoi-core.min.js"></script>
+
 <script type="text/paperscript" canvas="canvas-0014">
   var voronoi =  new Voronoi();
 
@@ -1043,67 +1206,6 @@
 <span class="o">&lt;</span><span class="err">/script&gt;</span>
 
 <span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0006&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
-    </div>
-  </div>
-
-  <div class="post">
-    <script type="text/paperscript" canvas="canvas-0005">
-  var color = new Color('#0074d9');
-  color.alpha = 0.6;
-
-  var circle = new Path.Circle({
-        center: [100, 100],
-        radius: 20,
-        fillColor: color
-      });
-
-  circle.scale(1.5, 3.5);
-
-  for (i = 0; i < 360; i += 60) {
-    var newCircle = circle.clone();
-    newCircle.fillColor.hue += i;
-    newCircle.blendMode = 'screen';
-    newCircle.rotate(i, [100, 150]);
-  }
-
-  circle.remove();
-
-  project.activeLayer.position = view.center;
-</script>
-
-<canvas id="canvas-0005" height="250"></canvas>
-
-    <a href="/pixelbits/2014/10/01/hue-flower.html" class="post-date">01 Oct 2014</a>
-    <p class="post-description">
-      Rotating paths, hue shifting, and blending modes. <a href="#" class="js-show-code">Show code</a>
-    </p>
-
-    <div class="code">
-      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0005&quot;</span><span class="o">&gt;</span>
-  <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;#0074d9&#39;</span><span class="p">);</span>
-  <span class="nx">color</span><span class="p">.</span><span class="nx">alpha</span> <span class="o">=</span> <span class="mf">0.6</span><span class="p">;</span>
-
-  <span class="kd">var</span> <span class="nx">circle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
-        <span class="nx">center</span><span class="o">:</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">],</span>
-        <span class="nx">radius</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
-        <span class="nx">fillColor</span><span class="o">:</span> <span class="nx">color</span>
-      <span class="p">});</span>
-
-  <span class="nx">circle</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">3.5</span><span class="p">);</span>
-
-  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">360</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">60</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">newCircle</span> <span class="o">=</span> <span class="nx">circle</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
-    <span class="nx">newCircle</span><span class="p">.</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="nx">i</span><span class="p">;</span>
-    <span class="nx">newCircle</span><span class="p">.</span><span class="nx">blendMode</span> <span class="o">=</span> <span class="s1">&#39;screen&#39;</span><span class="p">;</span>
-    <span class="nx">newCircle</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="mi">150</span><span class="p">]);</span>
-  <span class="p">}</span>
-
-  <span class="nx">circle</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
-
-  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
-
-<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0005&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
     </div>
   </div>
 
