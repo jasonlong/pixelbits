@@ -20,6 +20,63 @@
 
   
   <div class="post">
+    <script type="text/paperscript" canvas="canvas-0006">
+  view.element.style.backgroundColor = '#111111';
+
+  var rectSize = view.size.width * 0.3;
+  var cornerRadius = rectSize * 0.1;
+
+  var color = new Color('#0074d9');
+  var rect = new Rectangle(new Point(0, 0), new Size(rectSize, rectSize));
+  var cornerSize = new Size(cornerRadius, cornerRadius);
+  var shape = new Shape.Rectangle(rect, cornerSize);
+  shape.strokeColor = color;
+
+  for (i = 0; i < 360; i += 10) {
+      var newShape = shape.clone();
+      newShape.strokeColor.hue += i;
+      newShape.rotate(i, [rectSize/4, rectSize/4]);
+  }
+
+  shape.remove();
+  project.activeLayer.position = view.center;
+</script>
+
+<canvas id="canvas-0006" height="250"></canvas>
+
+    <a href="/pixelbits/2014/10/04/rainbow-pseudo-spirograph.html" class="post-date">04 Oct 2014</a>
+    <p class="post-description">
+      Pseudo-spirograph made of rotating rounded squares. <a href="#" class="js-show-code">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0006&quot;</span><span class="o">&gt;</span>
+  <span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;#111111&#39;</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">rectSize</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">*</span> <span class="mf">0.3</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">cornerRadius</span> <span class="o">=</span> <span class="nx">rectSize</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;#0074d9&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">rect</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="nx">rectSize</span><span class="p">,</span> <span class="nx">rectSize</span><span class="p">));</span>
+  <span class="kd">var</span> <span class="nx">cornerSize</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="nx">cornerRadius</span><span class="p">,</span> <span class="nx">cornerRadius</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">rect</span><span class="p">,</span> <span class="nx">cornerSize</span><span class="p">);</span>
+  <span class="nx">shape</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">360</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mi">10</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">newShape</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+      <span class="nx">newShape</span><span class="p">.</span><span class="nx">strokeColor</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="nx">i</span><span class="p">;</span>
+      <span class="nx">newShape</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="p">[</span><span class="nx">rectSize</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="nx">rectSize</span><span class="o">/</span><span class="mi">4</span><span class="p">]);</span>
+  <span class="p">}</span>
+
+  <span class="nx">shape</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0006&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
     <script type="text/paperscript" canvas="canvas-0005">
   var color = new Color('#0074d9');
   color.alpha = 0.6;
