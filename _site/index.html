@@ -20,6 +20,61 @@
 
   
   <div class="post">
+    <script type="text/paperscript" canvas="canvas-0017">
+view.element.style.background = "linear-gradient(to bottom, #3a1d3a 0%,#e7584c 100%)";
+
+width = view.size.width;
+yMid = view.size.height / 2;
+
+for (var i=0; i<18; i++) {
+    for (var x=0; x<width; x+=3) {
+        _x = (x + 500) * Math.PI/180 / 20;
+        y = (Math.sin(_x*(8 - i/12)*Math.PI) +
+            Math.sin(_x*(9 + i/13)*Math.PI) +
+            Math.sin(_x*(10 - i/14)*Math.PI)) * 50;
+        var shape = new Shape.Circle(new Point(x, y), 1);
+        shape.fillColor = '#fff';
+        shape.opacity = 0.7;
+    }
+}
+
+project.activeLayer.position = view.center;
+</script>
+
+<canvas id="canvas-0017"></canvas>
+
+    <a href="/pixelbits/2014/11/07/sine-wave-dots.html" class="post-date">07 Nov 2014</a>
+    <p class="post-description">
+      Derping around with sine wave phasing. <a href="#" class="js-show-code">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0017&quot;</span><span class="o">&gt;</span>
+<span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span> <span class="o">=</span> <span class="s2">&quot;linear-gradient(to bottom, #3a1d3a 0%,#e7584c 100%)&quot;</span><span class="p">;</span>
+
+<span class="nx">width</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="nx">yMid</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">18</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">x</span><span class="o">&lt;</span><span class="nx">width</span><span class="p">;</span> <span class="nx">x</span><span class="o">+=</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">_x</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="mi">500</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="o">/</span><span class="mi">180</span> <span class="o">/</span> <span class="mi">20</span><span class="p">;</span>
+        <span class="nx">y</span> <span class="o">=</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">_x</span><span class="o">*</span><span class="p">(</span><span class="mi">8</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span> <span class="o">+</span>
+            <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">_x</span><span class="o">*</span><span class="p">(</span><span class="mi">9</span> <span class="o">+</span> <span class="nx">i</span><span class="o">/</span><span class="mi">13</span><span class="p">)</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span> <span class="o">+</span>
+            <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">_x</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">14</span><span class="p">)</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">))</span> <span class="o">*</span> <span class="mi">50</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="nx">shape</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="s1">&#39;#fff&#39;</span><span class="p">;</span>
+        <span class="nx">shape</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0017&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
     <script type="text/paperscript" canvas="canvas-0016">
 for (var i=15; i<100; i++) {
   var f = i * 0.8;
@@ -1093,109 +1148,6 @@ function radians(angle) {
 <span class="o">&lt;</span><span class="err">/script&gt;</span>
 
 <span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0008&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
-    </div>
-  </div>
-
-  <div class="post">
-    <script type="text/paperscript" canvas="canvas-0007">
-  var bgColor = "#2f325c";
-  var fgColor = "#405e7d";
-
-  view.element.style.backgroundColor = bgColor;
-
-  var center = new Point(0, 0);
-  var points = 4;
-  var radius1 = view.size.height / 12;
-  var radius2 = view.size.height / 3;
-
-  var star = new Path.Star(center, points, radius1, radius2);
-  star.strokeColor = fgColor;
-  star.rotate(45);
-  var lineH = new Path.Line({
-      from: [0, -radius2],
-      to: [0, radius2],
-      strokeColor: fgColor
-  });
-
-  var lineV = new Path.Line({
-      from: [-radius2, 0],
-      to: [radius2, 0],
-      strokeColor: fgColor
-  });
-
-  var starGroup = new Group();
-  starGroup.addChildren([star, lineH, lineV]);
-
-  // Stars
-  for (i = 0; i < 90; i += 22.5) {
-      var newStar = starGroup.clone();
-      newStar.rotate(i);
-  }
-  starGroup.remove();
-
-  // Circles
-  for (i = radius1; i <= radius2; i += radius1) {
-      var circle = new Path.Circle(new Point(0, 0), i);
-      circle.strokeColor = fgColor;
-  }
-
-  project.activeLayer.position = view.center;
-</script>
-
-<canvas id="canvas-0007" height="250"></canvas>
-
-    <a href="/pixelbits/2014/10/05/geometric-star.html" class="post-date">05 Oct 2014</a>
-    <p class="post-description">
-      Copying and rotating shape groups. <a href="#" class="js-show-code">Show code</a>
-    </p>
-
-    <div class="code">
-      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0007&quot;</span><span class="o">&gt;</span>
-  <span class="kd">var</span> <span class="nx">bgColor</span> <span class="o">=</span> <span class="s2">&quot;#2f325c&quot;</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">fgColor</span> <span class="o">=</span> <span class="s2">&quot;#405e7d&quot;</span><span class="p">;</span>
-
-  <span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="nx">bgColor</span><span class="p">;</span>
-
-  <span class="kd">var</span> <span class="nx">center</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-  <span class="kd">var</span> <span class="nx">points</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">radius1</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">12</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">radius2</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">3</span><span class="p">;</span>
-
-  <span class="kd">var</span> <span class="nx">star</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Star</span><span class="p">(</span><span class="nx">center</span><span class="p">,</span> <span class="nx">points</span><span class="p">,</span> <span class="nx">radius1</span><span class="p">,</span> <span class="nx">radius2</span><span class="p">);</span>
-  <span class="nx">star</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">fgColor</span><span class="p">;</span>
-  <span class="nx">star</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">45</span><span class="p">);</span>
-  <span class="kd">var</span> <span class="nx">lineH</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">({</span>
-      <span class="nx">from</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="nx">radius2</span><span class="p">],</span>
-      <span class="nx">to</span><span class="o">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nx">radius2</span><span class="p">],</span>
-      <span class="nx">strokeColor</span><span class="o">:</span> <span class="nx">fgColor</span>
-  <span class="p">});</span>
-
-  <span class="kd">var</span> <span class="nx">lineV</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Line</span><span class="p">({</span>
-      <span class="nx">from</span><span class="o">:</span> <span class="p">[</span><span class="o">-</span><span class="nx">radius2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-      <span class="nx">to</span><span class="o">:</span> <span class="p">[</span><span class="nx">radius2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-      <span class="nx">strokeColor</span><span class="o">:</span> <span class="nx">fgColor</span>
-  <span class="p">});</span>
-
-  <span class="kd">var</span> <span class="nx">starGroup</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Group</span><span class="p">();</span>
-  <span class="nx">starGroup</span><span class="p">.</span><span class="nx">addChildren</span><span class="p">([</span><span class="nx">star</span><span class="p">,</span> <span class="nx">lineH</span><span class="p">,</span> <span class="nx">lineV</span><span class="p">]);</span>
-
-  <span class="c1">// Stars</span>
-  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">90</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="mf">22.5</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">newStar</span> <span class="o">=</span> <span class="nx">starGroup</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
-      <span class="nx">newStar</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">i</span><span class="p">);</span>
-  <span class="p">}</span>
-  <span class="nx">starGroup</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
-
-  <span class="c1">// Circles</span>
-  <span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="nx">radius1</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;=</span> <span class="nx">radius2</span><span class="p">;</span> <span class="nx">i</span> <span class="o">+=</span> <span class="nx">radius1</span><span class="p">)</span> <span class="p">{</span>
-      <span class="kd">var</span> <span class="nx">circle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="nx">i</span><span class="p">);</span>
-      <span class="nx">circle</span><span class="p">.</span><span class="nx">strokeColor</span> <span class="o">=</span> <span class="nx">fgColor</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
-
-<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0007&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
     </div>
   </div>
 

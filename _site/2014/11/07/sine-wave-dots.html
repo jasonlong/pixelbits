@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Pixelbits by Jason Long</title>
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="/pixelbits/css/normalize.css">
+    <link rel="stylesheet" href="/pixelbits/css/syntax.css">
+    <link rel="stylesheet" href="/pixelbits/css/site.css">
+    <script src="/pixelbits/js/paper-full.min.js"></script>
+    <script src="/pixelbits/js/zepto.min.js"></script>
+    <script src="/pixelbits/js/site.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="site-name"><a href="/pixelbits">Pixelbits</a></h1>
+      <p class="lead">Hi, I'm <a href="http://twitter.com/jasonlong">@jasonlong</a>. I'm trying to make a small creative coding sketch every day(ish) to learn new things.</p>
+
+<div class="post">
+  <script type="text/paperscript" canvas="canvas-0017">
+view.element.style.background = "linear-gradient(to bottom, #3a1d3a 0%,#e7584c 100%)";
+
+width = view.size.width;
+yMid = view.size.height / 2;
+
+for (var i=0; i<18; i++) {
+    for (var x=0; x<width; x+=3) {
+        _x = (x + 500) * Math.PI/180 / 20;
+        y = (Math.sin(_x*(8 - i/12)*Math.PI) +
+            Math.sin(_x*(9 + i/13)*Math.PI) +
+            Math.sin(_x*(10 - i/14)*Math.PI)) * 50;
+        var shape = new Shape.Circle(new Point(x, y), 1);
+        shape.fillColor = '#fff';
+        shape.opacity = 0.7;
+    }
+}
+
+project.activeLayer.position = view.center;
+</script>
+
+<canvas id="canvas-0017"></canvas>
+
+  <span class="post-date">07 Nov 2014</span>
+  <p class="post-description">Derping around with sine wave phasing.</p>
+
+  
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0017&quot;</span><span class="o">&gt;</span>
+<span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span> <span class="o">=</span> <span class="s2">&quot;linear-gradient(to bottom, #3a1d3a 0%,#e7584c 100%)&quot;</span><span class="p">;</span>
+
+<span class="nx">width</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="nx">yMid</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">18</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">x</span><span class="o">&lt;</span><span class="nx">width</span><span class="p">;</span> <span class="nx">x</span><span class="o">+=</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">_x</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="mi">500</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="o">/</span><span class="mi">180</span> <span class="o">/</span> <span class="mi">20</span><span class="p">;</span>
+        <span class="nx">y</span> <span class="o">=</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">_x</span><span class="o">*</span><span class="p">(</span><span class="mi">8</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span> <span class="o">+</span>
+            <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">_x</span><span class="o">*</span><span class="p">(</span><span class="mi">9</span> <span class="o">+</span> <span class="nx">i</span><span class="o">/</span><span class="mi">13</span><span class="p">)</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span> <span class="o">+</span>
+            <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">_x</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">14</span><span class="p">)</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">))</span> <span class="o">*</span> <span class="mi">50</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="nx">shape</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="s1">&#39;#fff&#39;</span><span class="p">;</span>
+        <span class="nx">shape</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0017&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+
+</div>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49925874-2', 'auto');
+      ga('send', 'pageview');
+  </script>
+  </body>
+</html>
+
