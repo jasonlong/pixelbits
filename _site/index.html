@@ -27,15 +27,15 @@ width = view.size.width;
 yMid = view.size.height / 2;
 
 for (var i=0; i<18; i++) {
-    for (var x=0; x<width; x+=3) {
-        _x = (x + 500) * Math.PI/180 / 20;
-        y = (Math.sin(_x*(8 - i/12)*Math.PI) +
-            Math.sin(_x*(9 + i/13)*Math.PI) +
-            Math.sin(_x*(10 - i/14)*Math.PI)) * 50;
-        var shape = new Shape.Circle(new Point(x, y), 1);
-        shape.fillColor = '#fff';
-        shape.opacity = 0.7;
-    }
+  for (var x=0; x<width; x+=3) {
+    _x = (x + 500) * Math.PI/180 / 20;
+    y = (Math.sin(_x*(8 - i/12)*Math.PI) +
+        Math.sin(_x*(9 + i/13)*Math.PI) +
+        Math.sin(_x*(10 - i/14)*Math.PI)) * 50;
+    var shape = new Shape.Circle(new Point(x, y), 1);
+    shape.fillColor = '#fff';
+    shape.opacity = 0.7;
+  }
 }
 
 project.activeLayer.position = view.center;
@@ -56,15 +56,15 @@ project.activeLayer.position = view.center;
 <span class="nx">yMid</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
 
 <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">18</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">x</span><span class="o">&lt;</span><span class="nx">width</span><span class="p">;</span> <span class="nx">x</span><span class="o">+=</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">_x</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="mi">500</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="o">/</span><span class="mi">180</span> <span class="o">/</span> <span class="mi">20</span><span class="p">;</span>
-        <span class="nx">y</span> <span class="o">=</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">_x</span><span class="o">*</span><span class="p">(</span><span class="mi">8</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span> <span class="o">+</span>
-            <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">_x</span><span class="o">*</span><span class="p">(</span><span class="mi">9</span> <span class="o">+</span> <span class="nx">i</span><span class="o">/</span><span class="mi">13</span><span class="p">)</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span> <span class="o">+</span>
-            <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">_x</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">14</span><span class="p">)</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">))</span> <span class="o">*</span> <span class="mi">50</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
-        <span class="nx">shape</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="s1">&#39;#fff&#39;</span><span class="p">;</span>
-        <span class="nx">shape</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">;</span>
-    <span class="p">}</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">x</span><span class="o">&lt;</span><span class="nx">width</span><span class="p">;</span> <span class="nx">x</span><span class="o">+=</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">_x</span> <span class="o">=</span> <span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="mi">500</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="o">/</span><span class="mi">180</span> <span class="o">/</span> <span class="mi">20</span><span class="p">;</span>
+    <span class="nx">y</span> <span class="o">=</span> <span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">_x</span><span class="o">*</span><span class="p">(</span><span class="mi">8</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">12</span><span class="p">)</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span> <span class="o">+</span>
+        <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">_x</span><span class="o">*</span><span class="p">(</span><span class="mi">9</span> <span class="o">+</span> <span class="nx">i</span><span class="o">/</span><span class="mi">13</span><span class="p">)</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">)</span> <span class="o">+</span>
+        <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">_x</span><span class="o">*</span><span class="p">(</span><span class="mi">10</span> <span class="o">-</span> <span class="nx">i</span><span class="o">/</span><span class="mi">14</span><span class="p">)</span><span class="o">*</span><span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">))</span> <span class="o">*</span> <span class="mi">50</span><span class="p">;</span>
+    <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">),</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="nx">shape</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="s1">&#39;#fff&#39;</span><span class="p">;</span>
+    <span class="nx">shape</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">;</span>
+  <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>

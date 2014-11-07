@@ -13,15 +13,15 @@ width = view.size.width;
 yMid = view.size.height / 2;
 
 for (var i=0; i<18; i++) {
-    for (var x=0; x<width; x+=3) {
-        _x = (x + 500) * Math.PI/180 / 20;
-        y = (Math.sin(_x*(8 - i/12)*Math.PI) +
-            Math.sin(_x*(9 + i/13)*Math.PI) +
-            Math.sin(_x*(10 - i/14)*Math.PI)) * 50;
-        var shape = new Shape.Circle(new Point(x, y), 1);
-        shape.fillColor = '#fff';
-        shape.opacity = 0.7;
-    }
+  for (var x=0; x<width; x+=3) {
+    _x = (x + 500) * Math.PI/180 / 20;
+    y = (Math.sin(_x*(8 - i/12)*Math.PI) +
+        Math.sin(_x*(9 + i/13)*Math.PI) +
+        Math.sin(_x*(10 - i/14)*Math.PI)) * 50;
+    var shape = new Shape.Circle(new Point(x, y), 1);
+    shape.fillColor = '#fff';
+    shape.opacity = 0.7;
+  }
 }
 
 project.activeLayer.position = view.center;
