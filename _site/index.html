@@ -20,6 +20,150 @@
 
   
   <div class="post">
+    <script type="text/paperscript" canvas="canvas-0018">
+RADIUS_MIN = 1;
+RADIUS_MAX = 4;
+
+function Ball(p, r) {
+  this.radius           = r;
+  this.point            = p;
+  this.growing          = false;
+  this.circle           = Shape.Circle(p, r);
+  this.circle.fillColor = '#ed25bc';
+}
+
+Ball.prototype = {
+  iterate: function() {
+    if (this.growing) {
+      if (this.circle.radius >= RADIUS_MAX) {
+        this.growing = false;
+      }
+      else {
+        this.circle.radius += 0.1;
+        this.circle.fillColor.hue += 1;
+      }
+    }
+    else {
+      if (this.circle.radius <= RADIUS_MIN) {
+        this.growing = true;
+      }
+      else {
+        this.circle.radius -= 0.1;
+        this.circle.fillColor.hue -= 1;
+      }
+    }
+  }
+}
+
+var balls = [];
+
+view.element.style.background = "#111";
+
+width  = view.size.width;
+height = view.size.height;
+radius = RADIUS_MIN;
+
+for (i=3; i<12; i++) {
+  for (a=0; a<360; a+=15) {
+    var x = Math.cos(radians(a + (i*7.5))) * (20 * i);
+    var y = Math.sin(radians(a + (i*7.5))) * (20 * i);
+    balls.push(new Ball(new Point(x, y), radius));
+  }
+  radius += 1;
+}
+
+project.activeLayer.position = view.center;
+
+function radians(angle) {
+  return (angle / 180) * Math.PI;
+}
+
+function onFrame(event) {
+  for (var i = 0, l = balls.length; i < l; i++) {
+    balls[i].iterate();
+  }
+}
+</script>
+
+<canvas id="canvas-0018" height="250"></canvas>
+
+
+    <a href="/pixelbits/2014/11/11/oscillating-dots.html" class="post-date">11 Nov 2014</a>
+    <p class="post-description">
+      Trying out some polar coordinates to make oscillating dots. The circle sizing here is linear and would be nicer if it followed a sine wave. <a href="#" class="js-show-code">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0018&quot;</span><span class="o">&gt;</span>
+<span class="nx">RADIUS_MIN</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nx">RADIUS_MAX</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">Ball</span><span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">r</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">radius</span>           <span class="o">=</span> <span class="nx">r</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">point</span>            <span class="o">=</span> <span class="nx">p</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">growing</span>          <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">circle</span>           <span class="o">=</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">Circle</span><span class="p">(</span><span class="nx">p</span><span class="p">,</span> <span class="nx">r</span><span class="p">);</span>
+  <span class="k">this</span><span class="p">.</span><span class="nx">circle</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="s1">&#39;#ed25bc&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">Ball</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="nx">iterate</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">growing</span><span class="p">)</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">circle</span><span class="p">.</span><span class="nx">radius</span> <span class="o">&gt;=</span> <span class="nx">RADIUS_MAX</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">growing</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">circle</span><span class="p">.</span><span class="nx">radius</span> <span class="o">+=</span> <span class="mf">0.1</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">circle</span><span class="p">.</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">circle</span><span class="p">.</span><span class="nx">radius</span> <span class="o">&lt;=</span> <span class="nx">RADIUS_MIN</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">growing</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+      <span class="p">}</span>
+      <span class="k">else</span> <span class="p">{</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">circle</span><span class="p">.</span><span class="nx">radius</span> <span class="o">-=</span> <span class="mf">0.1</span><span class="p">;</span>
+        <span class="k">this</span><span class="p">.</span><span class="nx">circle</span><span class="p">.</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">hue</span> <span class="o">-=</span> <span class="mi">1</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">var</span> <span class="nx">balls</span> <span class="o">=</span> <span class="p">[];</span>
+
+<span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">background</span> <span class="o">=</span> <span class="s2">&quot;#111&quot;</span><span class="p">;</span>
+
+<span class="nx">width</span>  <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span>
+<span class="nx">height</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span>
+<span class="nx">radius</span> <span class="o">=</span> <span class="nx">RADIUS_MIN</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="nx">i</span><span class="o">=</span><span class="mi">3</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="mi">12</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="nx">a</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">a</span><span class="o">&lt;</span><span class="mi">360</span><span class="p">;</span> <span class="nx">a</span><span class="o">+=</span><span class="mi">15</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">cos</span><span class="p">(</span><span class="nx">radians</span><span class="p">(</span><span class="nx">a</span> <span class="o">+</span> <span class="p">(</span><span class="nx">i</span><span class="o">*</span><span class="mf">7.5</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="nx">i</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sin</span><span class="p">(</span><span class="nx">radians</span><span class="p">(</span><span class="nx">a</span> <span class="o">+</span> <span class="p">(</span><span class="nx">i</span><span class="o">*</span><span class="mf">7.5</span><span class="p">)))</span> <span class="o">*</span> <span class="p">(</span><span class="mi">20</span> <span class="o">*</span> <span class="nx">i</span><span class="p">);</span>
+    <span class="nx">balls</span><span class="p">.</span><span class="nx">push</span><span class="p">(</span><span class="k">new</span> <span class="nx">Ball</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">),</span> <span class="nx">radius</span><span class="p">));</span>
+  <span class="p">}</span>
+  <span class="nx">radius</span> <span class="o">+=</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">radians</span><span class="p">(</span><span class="nx">angle</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span><span class="nx">angle</span> <span class="o">/</span> <span class="mi">180</span><span class="p">)</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">onFrame</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">l</span> <span class="o">=</span> <span class="nx">balls</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">l</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">balls</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">iterate</span><span class="p">();</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0018&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
     <script type="text/paperscript" canvas="canvas-0017">
 view.element.style.background = "linear-gradient(to bottom, #3a1d3a 0%,#e7584c 100%)";
 
@@ -1059,95 +1203,6 @@ function radians(angle) {
 <span class="o">&lt;</span><span class="err">/script&gt;</span>
 
 <span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0009&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
-    </div>
-  </div>
-
-  <div class="post">
-    <script type="text/paperscript" canvas="canvas-0008">
-  var columns = 12;
-  var isoSize = view.size.width / columns;
-  var isoWidth = isoSize * Math.sqrt(3) / 2;
-  var row = 0;
-  var lightFalloff = 0.0008;
-
-  for (var y = 0; y <= view.size.height + isoSize; y += isoSize - isoSize / 4) {
-    row++;
-    for (var x = 0; x <= view.size.width + isoWidth; x += isoWidth) {
-
-      var group = new Group();
-      var dx = (row % 2) ? isoWidth / 2 : 0;
-      var hexagon = new Path.RegularPolygon([x-dx,y], 6, isoSize / 2);
-      group.addChild(hexagon);
-
-      for (var i = 0; i < 2; i++) {
-        var path = new Path();
-        for (var j = 0; j < 3; j++) {
-          var index = (i * 2 + j) % hexagon.segments.length;
-          path.add(hexagon.segments[index].clone());
-        }
-        path.add(hexagon.bounds.center);
-        group.addChild(path);
-      }
-
-      var color = "#b10dc9";
-
-      group.children[0].fillColor = color;
-      group.children[1].fillColor = color;
-      group.children[2].fillColor = color;
-      group.children[0].fillColor.brightness *= 0.75 - (y * lightFalloff);
-      group.children[1].fillColor.brightness *= 1 - (y * lightFalloff);
-      group.children[2].fillColor.brightness *= 0.55 - (y * lightFalloff);
-    }
-  }
-</script>
-
-<canvas id="canvas-0008" height="250"></canvas>
-
-    <a href="/pixelbits/2014/10/07/shaded-cubes.html" class="post-date">07 Oct 2014</a>
-    <p class="post-description">
-      Isometric cubes with faux shadows. <a href="#" class="js-show-code">Show code</a>
-    </p>
-
-    <div class="code">
-      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0008&quot;</span><span class="o">&gt;</span>
-  <span class="kd">var</span> <span class="nx">columns</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">isoSize</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="nx">columns</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">isoWidth</span> <span class="o">=</span> <span class="nx">isoSize</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">row</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-  <span class="kd">var</span> <span class="nx">lightFalloff</span> <span class="o">=</span> <span class="mf">0.0008</span><span class="p">;</span>
-
-  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">+</span> <span class="nx">isoSize</span><span class="p">;</span> <span class="nx">y</span> <span class="o">+=</span> <span class="nx">isoSize</span> <span class="o">-</span> <span class="nx">isoSize</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span> <span class="p">{</span>
-    <span class="nx">row</span><span class="o">++</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">+</span> <span class="nx">isoWidth</span><span class="p">;</span> <span class="nx">x</span> <span class="o">+=</span> <span class="nx">isoWidth</span><span class="p">)</span> <span class="p">{</span>
-
-      <span class="kd">var</span> <span class="nx">group</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Group</span><span class="p">();</span>
-      <span class="kd">var</span> <span class="nx">dx</span> <span class="o">=</span> <span class="p">(</span><span class="nx">row</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="o">?</span> <span class="nx">isoWidth</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">:</span> <span class="mi">0</span><span class="p">;</span>
-      <span class="kd">var</span> <span class="nx">hexagon</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">RegularPolygon</span><span class="p">([</span><span class="nx">x</span><span class="o">-</span><span class="nx">dx</span><span class="p">,</span><span class="nx">y</span><span class="p">],</span> <span class="mi">6</span><span class="p">,</span> <span class="nx">isoSize</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
-      <span class="nx">group</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">hexagon</span><span class="p">);</span>
-
-      <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">();</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-          <span class="kd">var</span> <span class="nx">index</span> <span class="o">=</span> <span class="p">(</span><span class="nx">i</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="nx">j</span><span class="p">)</span> <span class="o">%</span> <span class="nx">hexagon</span><span class="p">.</span><span class="nx">segments</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
-          <span class="nx">path</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">hexagon</span><span class="p">.</span><span class="nx">segments</span><span class="p">[</span><span class="nx">index</span><span class="p">].</span><span class="nx">clone</span><span class="p">());</span>
-        <span class="p">}</span>
-        <span class="nx">path</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">hexagon</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">center</span><span class="p">);</span>
-        <span class="nx">group</span><span class="p">.</span><span class="nx">addChild</span><span class="p">(</span><span class="nx">path</span><span class="p">);</span>
-      <span class="p">}</span>
-
-      <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="s2">&quot;#b10dc9&quot;</span><span class="p">;</span>
-
-      <span class="nx">group</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
-      <span class="nx">group</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
-      <span class="nx">group</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
-      <span class="nx">group</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">brightness</span> <span class="o">*=</span> <span class="mf">0.75</span> <span class="o">-</span> <span class="p">(</span><span class="nx">y</span> <span class="o">*</span> <span class="nx">lightFalloff</span><span class="p">);</span>
-      <span class="nx">group</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">brightness</span> <span class="o">*=</span> <span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="nx">y</span> <span class="o">*</span> <span class="nx">lightFalloff</span><span class="p">);</span>
-      <span class="nx">group</span><span class="p">.</span><span class="nx">children</span><span class="p">[</span><span class="mi">2</span><span class="p">].</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">brightness</span> <span class="o">*=</span> <span class="mf">0.55</span> <span class="o">-</span> <span class="p">(</span><span class="nx">y</span> <span class="o">*</span> <span class="nx">lightFalloff</span><span class="p">);</span>
-    <span class="p">}</span>
-  <span class="p">}</span>
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
-
-<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0008&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
     </div>
   </div>
 
