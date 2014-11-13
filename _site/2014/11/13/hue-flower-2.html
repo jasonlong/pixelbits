@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Pixelbits by Jason Long</title>
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="/pixelbits/css/normalize.css">
+    <link rel="stylesheet" href="/pixelbits/css/syntax.css">
+    <link rel="stylesheet" href="/pixelbits/css/site.css">
+    <script src="/pixelbits/js/paper-full.min.js"></script>
+    <script src="/pixelbits/js/zepto.min.js"></script>
+    <script src="/pixelbits/js/site.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="site-name"><a href="/pixelbits">Pixelbits</a></h1>
+      <p class="lead">Hi, I'm <a href="http://twitter.com/jasonlong">@jasonlong</a>. I'm trying to make a small creative coding sketch every day(ish) to learn new things.</p>
+
+<div class="post">
+  <script type="text/paperscript" canvas="canvas-0019">
+view.element.style.backgroundColor = '#111';
+
+var color = new Color('#0074d9');
+var rectangle = new Rectangle(new Point(0, 0), new Size(100, 200));
+var shape = new Path.Ellipse(rectangle);
+shape.fillColor = color;
+
+var numLayers = 3;
+var blendModes = ['screen', 'screen', 'multiply'];
+
+// make it pointy
+shape.segments[1].handleIn.x = 0;
+shape.segments[1].handleOut.x = 0;
+shape.segments[3].handleIn.x = 0;
+shape.segments[3].handleOut.x = 0;
+
+var opacity = 0.3;
+for (i = 0; i < numLayers; i++) {
+    for (j = 0; j < 360; j += 15) {
+        var newShape = shape.clone();
+        newShape.scale(1 - (i * 0.33));
+        newShape.fillColor.hue += j;
+        newShape.opacity = opacity;
+        newShape.blendMode = blendModes[i];
+        newShape.rotate(j, [50, 220]);
+    }
+    opacity += 0.2;
+}
+
+shape.remove();
+
+project.activeLayer.position = view.center;
+
+
+</script>
+
+<canvas id="canvas-0019" height="250"></canvas>
+
+
+  <span class="post-date">13 Nov 2014</span>
+  <p class="post-description">Another hue flower. You can get some interesting effects just adding more layers and playing with blend modes.</p>
+
+  
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0019&quot;</span><span class="o">&gt;</span>
+<span class="nx">view</span><span class="p">.</span><span class="nx">element</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">backgroundColor</span> <span class="o">=</span> <span class="s1">&#39;#111&#39;</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Color</span><span class="p">(</span><span class="s1">&#39;#0074d9&#39;</span><span class="p">);</span>
+<span class="kd">var</span> <span class="nx">rectangle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">));</span>
+<span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Ellipse</span><span class="p">(</span><span class="nx">rectangle</span><span class="p">);</span>
+<span class="nx">shape</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">numLayers</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">blendModes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;screen&#39;</span><span class="p">,</span> <span class="s1">&#39;screen&#39;</span><span class="p">,</span> <span class="s1">&#39;multiply&#39;</span><span class="p">];</span>
+
+<span class="c1">// make it pointy</span>
+<span class="nx">shape</span><span class="p">.</span><span class="nx">segments</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">handleIn</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">shape</span><span class="p">.</span><span class="nx">segments</span><span class="p">[</span><span class="mi">1</span><span class="p">].</span><span class="nx">handleOut</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">shape</span><span class="p">.</span><span class="nx">segments</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="nx">handleIn</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="nx">shape</span><span class="p">.</span><span class="nx">segments</span><span class="p">[</span><span class="mi">3</span><span class="p">].</span><span class="nx">handleOut</span><span class="p">.</span><span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">opacity</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">;</span>
+<span class="k">for</span> <span class="p">(</span><span class="nx">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">numLayers</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(</span><span class="nx">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="mi">360</span><span class="p">;</span> <span class="nx">j</span> <span class="o">+=</span> <span class="mi">15</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kd">var</span> <span class="nx">newShape</span> <span class="o">=</span> <span class="nx">shape</span><span class="p">.</span><span class="nx">clone</span><span class="p">();</span>
+        <span class="nx">newShape</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="p">(</span><span class="nx">i</span> <span class="o">*</span> <span class="mf">0.33</span><span class="p">));</span>
+        <span class="nx">newShape</span><span class="p">.</span><span class="nx">fillColor</span><span class="p">.</span><span class="nx">hue</span> <span class="o">+=</span> <span class="nx">j</span><span class="p">;</span>
+        <span class="nx">newShape</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">=</span> <span class="nx">opacity</span><span class="p">;</span>
+        <span class="nx">newShape</span><span class="p">.</span><span class="nx">blendMode</span> <span class="o">=</span> <span class="nx">blendModes</span><span class="p">[</span><span class="nx">i</span><span class="p">];</span>
+        <span class="nx">newShape</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="nx">j</span><span class="p">,</span> <span class="p">[</span><span class="mi">50</span><span class="p">,</span> <span class="mi">220</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="nx">opacity</span> <span class="o">+=</span> <span class="mf">0.2</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nx">shape</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+
+<span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+
+
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0019&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+
+</div>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49925874-2', 'auto');
+      ga('send', 'pageview');
+  </script>
+  </body>
+</html>
+
