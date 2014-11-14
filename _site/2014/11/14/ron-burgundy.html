@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+    <title>Pixelbits by Jason Long</title>
+    <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700" rel="stylesheet">
+    <link rel="stylesheet" href="/pixelbits/css/normalize.css">
+    <link rel="stylesheet" href="/pixelbits/css/syntax.css">
+    <link rel="stylesheet" href="/pixelbits/css/site.css">
+    <script src="/pixelbits/js/paper-full.min.js"></script>
+    <script src="/pixelbits/js/zepto.min.js"></script>
+    <script src="/pixelbits/js/site.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="site-name"><a href="/pixelbits">Pixelbits</a></h1>
+      <p class="lead">Hi, I'm <a href="http://twitter.com/jasonlong">@jasonlong</a>. I'm trying to make a small creative coding sketch every day(ish) to learn new things.</p>
+
+<div class="post">
+  <script type="text/paperscript" canvas="canvas-0020">
+var raster = new Raster('/pixelbits/assets/ron-burgundy.jpg');
+raster.visible = false;
+
+var boxSize = 15;
+
+raster.on('load', function() {
+  // Resize image to a manageable size
+  raster.size = new Size(50, 50);
+
+  for (var y = 0; y < raster.height; y++) {
+    for(var x = 0; x < raster.width; x++) {
+      var color = raster.getPixel(x, y);
+
+      // bounding box
+      var box = new Rectangle(new Point(x * boxSize, y * boxSize), new Size(boxSize, boxSize));
+      var pathBox = new Path.Rectangle(box);
+
+      // fill line
+      var lineWidth = map(color.brightness, 0, 1, 8, 1);
+      var line = new Rectangle(new Point(x * boxSize, y * boxSize - boxSize / 2), new Size(lineWidth, boxSize * 2));
+      var pathLine = new Path.Rectangle(line);
+      pathLine.fillColor = 'red';
+      pathLine.rotate(45, new Point(x * boxSize, (y + 1) * boxSize));
+
+      // mask the rotated fill line by the bounding box using the intersection
+      newPath = pathBox.intersect(pathLine);
+      newPath.fillColor = '#84184b';
+      newPath.opacity = 0.5;
+
+      pathBox.remove();
+      pathLine.remove();
+    }
+  }
+});
+
+project.activeLayer.position = view.center;
+
+function map(value, vMin, vMax, dMin, dMax) {
+  var vValue = parseFloat(value);
+  var vRange = vMax - vMin;
+  var dRange = dMax - dMin;
+  return (vValue - vMin) * dRange / vRange + dMin;
+}
+
+</script>
+
+<canvas id="canvas-0020" height="300"></canvas>
+
+  <span class="post-date">14 Nov 2014</span>
+  <p class="post-description">I tried to recreate the background effect from this <a href="https://medium.com/ux-ui-design-2/dear-ticketmaster-271977289b41">Ticketmaster redesign concept</a>. This was the first time I've tried masking paths using boolean intersections.</p>
+
+  
+<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0020&quot;</span><span class="o">&gt;</span>
+<span class="kd">var</span> <span class="nx">raster</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Raster</span><span class="p">(</span><span class="s1">&#39;/pixelbits/assets/ron-burgundy.jpg&#39;</span><span class="p">);</span>
+<span class="nx">raster</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+
+<span class="kd">var</span> <span class="nx">boxSize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+
+<span class="nx">raster</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// Resize image to a manageable size</span>
+  <span class="nx">raster</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">raster</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">raster</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">raster</span><span class="p">.</span><span class="nx">getPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+
+      <span class="c1">// bounding box</span>
+      <span class="kd">var</span> <span class="nx">box</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span> <span class="o">*</span> <span class="nx">boxSize</span><span class="p">,</span> <span class="nx">y</span> <span class="o">*</span> <span class="nx">boxSize</span><span class="p">),</span> <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="nx">boxSize</span><span class="p">,</span> <span class="nx">boxSize</span><span class="p">));</span>
+      <span class="kd">var</span> <span class="nx">pathBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">box</span><span class="p">);</span>
+
+      <span class="c1">// fill line</span>
+      <span class="kd">var</span> <span class="nx">lineWidth</span> <span class="o">=</span> <span class="nx">map</span><span class="p">(</span><span class="nx">color</span><span class="p">.</span><span class="nx">brightness</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span> <span class="o">*</span> <span class="nx">boxSize</span><span class="p">,</span> <span class="nx">y</span> <span class="o">*</span> <span class="nx">boxSize</span> <span class="o">-</span> <span class="nx">boxSize</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">boxSize</span> <span class="o">*</span> <span class="mi">2</span><span class="p">));</span>
+      <span class="kd">var</span> <span class="nx">pathLine</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">line</span><span class="p">);</span>
+      <span class="nx">pathLine</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span>
+      <span class="nx">pathLine</span><span class="p">.</span><span class="nx">rotate</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span> <span class="o">*</span> <span class="nx">boxSize</span><span class="p">,</span> <span class="p">(</span><span class="nx">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nx">boxSize</span><span class="p">));</span>
+
+      <span class="c1">// mask the rotated fill line by the bounding box using the intersection</span>
+      <span class="nx">newPath</span> <span class="o">=</span> <span class="nx">pathBox</span><span class="p">.</span><span class="nx">intersect</span><span class="p">(</span><span class="nx">pathLine</span><span class="p">);</span>
+      <span class="nx">newPath</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="s1">&#39;#84184b&#39;</span><span class="p">;</span>
+      <span class="nx">newPath</span><span class="p">.</span><span class="nx">opacity</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+
+      <span class="nx">pathBox</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+      <span class="nx">pathLine</span><span class="p">.</span><span class="nx">remove</span><span class="p">();</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">map</span><span class="p">(</span><span class="nx">value</span><span class="p">,</span> <span class="nx">vMin</span><span class="p">,</span> <span class="nx">vMax</span><span class="p">,</span> <span class="nx">dMin</span><span class="p">,</span> <span class="nx">dMax</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">vValue</span> <span class="o">=</span> <span class="nb">parseFloat</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">vRange</span> <span class="o">=</span> <span class="nx">vMax</span> <span class="o">-</span> <span class="nx">vMin</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">dRange</span> <span class="o">=</span> <span class="nx">dMax</span> <span class="o">-</span> <span class="nx">dMin</span><span class="p">;</span>
+  <span class="k">return</span> <span class="p">(</span><span class="nx">vValue</span> <span class="o">-</span> <span class="nx">vMin</span><span class="p">)</span> <span class="o">*</span> <span class="nx">dRange</span> <span class="o">/</span> <span class="nx">vRange</span> <span class="o">+</span> <span class="nx">dMin</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0020&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;300&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+
+</div>
+    </div>
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-49925874-2', 'auto');
+      ga('send', 'pageview');
+  </script>
+  </body>
+</html>
+

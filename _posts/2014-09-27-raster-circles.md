@@ -40,10 +40,6 @@ tags:
         path.fillColor = color;
       }
     }
-
-    // Move the active layer to the center of the view, so all
-    // the created paths in it appear centered.
-    project.activeLayer.position = view.center;
   });
 
   // Move the active layer to the center of the view:
