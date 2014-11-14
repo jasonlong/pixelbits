@@ -24,7 +24,7 @@
 var raster = new Raster('/pixelbits/assets/ron-burgundy.jpg');
 raster.visible = false;
 
-var boxSize = 15;
+var boxSize = view.size.width / 50;
 
 raster.on('load', function() {
   // Resize image to a manageable size
@@ -39,7 +39,7 @@ raster.on('load', function() {
       var pathBox = new Path.Rectangle(box);
 
       // fill line
-      var lineWidth = map(color.brightness, 0, 1, 8, 1);
+      var lineWidth = map(color.brightness, 0, 1, boxSize/2, 1);
       var line = new Rectangle(new Point(x * boxSize, y * boxSize - boxSize / 2), new Size(lineWidth, boxSize * 2));
       var pathLine = new Path.Rectangle(line);
       pathLine.fillColor = 'red';
@@ -79,7 +79,7 @@ function map(value, vMin, vMax, dMin, dMax) {
 <span class="kd">var</span> <span class="nx">raster</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Raster</span><span class="p">(</span><span class="s1">&#39;/pixelbits/assets/ron-burgundy.jpg&#39;</span><span class="p">);</span>
 <span class="nx">raster</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
 
-<span class="kd">var</span> <span class="nx">boxSize</span> <span class="o">=</span> <span class="mi">15</span><span class="p">;</span>
+<span class="kd">var</span> <span class="nx">boxSize</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">width</span> <span class="o">/</span> <span class="mi">50</span><span class="p">;</span>
 
 <span class="nx">raster</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">// Resize image to a manageable size</span>
@@ -94,7 +94,7 @@ function map(value, vMin, vMax, dMin, dMax) {
       <span class="kd">var</span> <span class="nx">pathBox</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">box</span><span class="p">);</span>
 
       <span class="c1">// fill line</span>
-      <span class="kd">var</span> <span class="nx">lineWidth</span> <span class="o">=</span> <span class="nx">map</span><span class="p">(</span><span class="nx">color</span><span class="p">.</span><span class="nx">brightness</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+      <span class="kd">var</span> <span class="nx">lineWidth</span> <span class="o">=</span> <span class="nx">map</span><span class="p">(</span><span class="nx">color</span><span class="p">.</span><span class="nx">brightness</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">boxSize</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
       <span class="kd">var</span> <span class="nx">line</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Rectangle</span><span class="p">(</span><span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span> <span class="o">*</span> <span class="nx">boxSize</span><span class="p">,</span> <span class="nx">y</span> <span class="o">*</span> <span class="nx">boxSize</span> <span class="o">-</span> <span class="nx">boxSize</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="nx">lineWidth</span><span class="p">,</span> <span class="nx">boxSize</span> <span class="o">*</span> <span class="mi">2</span><span class="p">));</span>
       <span class="kd">var</span> <span class="nx">pathLine</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Rectangle</span><span class="p">(</span><span class="nx">line</span><span class="p">);</span>
       <span class="nx">pathLine</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="s1">&#39;red&#39;</span><span class="p">;</span>

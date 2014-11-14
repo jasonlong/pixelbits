@@ -11,7 +11,7 @@ tags:
 var raster = new Raster('/pixelbits/assets/ron-burgundy.jpg');
 raster.visible = false;
 
-var boxSize = 15;
+var boxSize = view.size.width / 50;
 
 raster.on('load', function() {
   // Resize image to a manageable size
@@ -26,7 +26,7 @@ raster.on('load', function() {
       var pathBox = new Path.Rectangle(box);
 
       // fill line
-      var lineWidth = map(color.brightness, 0, 1, 8, 1);
+      var lineWidth = map(color.brightness, 0, 1, boxSize/2, 1);
       var line = new Rectangle(new Point(x * boxSize, y * boxSize - boxSize / 2), new Size(lineWidth, boxSize * 2));
       var pathLine = new Path.Rectangle(line);
       pathLine.fillColor = 'red';
