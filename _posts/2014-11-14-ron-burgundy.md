@@ -29,7 +29,6 @@ raster.on('load', function() {
       var lineWidth = map(color.brightness, 0, 1, boxSize/2, 1);
       var line = new Rectangle(new Point(x * boxSize, y * boxSize - boxSize / 2), new Size(lineWidth, boxSize * 2));
       var pathLine = new Path.Rectangle(line);
-      pathLine.fillColor = 'red';
       pathLine.rotate(45, new Point(x * boxSize, (y + 1) * boxSize));
 
       // mask the rotated fill line by the bounding box using the intersection
