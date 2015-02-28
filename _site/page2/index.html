@@ -20,6 +20,163 @@
 
   
   <div class="post">
+    <script type="text/paperscript" canvas="canvas-0011">
+  var wooferSize = view.size.height * 0.4;
+
+  var outerRing = new Path.Circle({
+    center: view.center,
+    radius: wooferSize *= 1.1,
+    fillColor: '#111111'
+  });
+
+  var cone = new Path.Circle({
+    center: view.center,
+    radius: wooferSize * 0.97
+  });
+
+  cone.fillColor = {
+      gradient: {
+          stops: [['#1d1d1d', 0.3 ], ['#444444', 1]],
+          radial: true
+      },
+      origin: cone.bounds.topCenter + [0, 30],
+      destination: cone.bounds.rightCenter
+  };
+
+  var centerRing = new Path.Circle({
+    center: view.center,
+    radius: wooferSize / 3
+  });
+
+  centerRing.fillColor = {
+      gradient: {
+          stops: [['#444444', 0.3 ], ['#111111', 1]],
+          radial: true
+      },
+      origin: centerRing.bounds.topCenter + [0, 30],
+      destination: centerRing.bounds.rightCenter
+  };
+
+  var center = new Path.Circle({
+    center: view.center,
+    radius: wooferSize / 3.2
+  });
+
+  center.fillColor = {
+      gradient: {
+          stops: [['#aaaaaa', 0.1], ['#3f3f3f', 0.5], ['#222222', 1]],
+          radial: true
+      },
+      origin: center.bounds.topCenter + [0, wooferSize * 0.1],
+      destination: center.bounds.rightCenter
+  };
+
+  // Build the woofer group
+  var woofer = new Group(cone, centerRing, center);
+  var wooferBounds = woofer.bounds;
+  var frameCount = 0;
+
+  function onFrame(event) {
+    // 60 fps, so hit a bass note every 2/3 of a
+    // second or 90 bpm
+    if (frameCount++ == 40) {
+      woofer.scale(1.04);
+      frameCount = 0;
+    }
+    else if (event.count % 2) {
+      woofer.fitBounds(wooferBounds);
+    }
+    else {
+      woofer.scale(1.02, woofer.center);
+    }
+  }
+</script>
+
+<canvas id="canvas-0011" height="250"></canvas>
+
+    <a href="/pixelbits/2014/10/13/animated-woofer.html" class="post-date">13 Oct 2014</a>
+    <p class="post-description">
+      Animated woofer. The frequency is so low you probably can't even hear it. <a href="#" class="js-show-code">Show code</a>
+    </p>
+
+    <div class="code">
+      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0011&quot;</span><span class="o">&gt;</span>
+  <span class="kd">var</span> <span class="nx">wooferSize</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">size</span><span class="p">.</span><span class="nx">height</span> <span class="o">*</span> <span class="mf">0.4</span><span class="p">;</span>
+
+  <span class="kd">var</span> <span class="nx">outerRing</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
+    <span class="nx">center</span><span class="o">:</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">wooferSize</span> <span class="o">*=</span> <span class="mf">1.1</span><span class="p">,</span>
+    <span class="nx">fillColor</span><span class="o">:</span> <span class="s1">&#39;#111111&#39;</span>
+  <span class="p">});</span>
+
+  <span class="kd">var</span> <span class="nx">cone</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
+    <span class="nx">center</span><span class="o">:</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">wooferSize</span> <span class="o">*</span> <span class="mf">0.97</span>
+  <span class="p">});</span>
+
+  <span class="nx">cone</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">gradient</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">stops</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;#1d1d1d&#39;</span><span class="p">,</span> <span class="mf">0.3</span> <span class="p">],</span> <span class="p">[</span><span class="s1">&#39;#444444&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+          <span class="nx">radial</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nx">origin</span><span class="o">:</span> <span class="nx">cone</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">topCenter</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
+      <span class="nx">destination</span><span class="o">:</span> <span class="nx">cone</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">rightCenter</span>
+  <span class="p">};</span>
+
+  <span class="kd">var</span> <span class="nx">centerRing</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
+    <span class="nx">center</span><span class="o">:</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">wooferSize</span> <span class="o">/</span> <span class="mi">3</span>
+  <span class="p">});</span>
+
+  <span class="nx">centerRing</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">gradient</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">stops</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;#444444&#39;</span><span class="p">,</span> <span class="mf">0.3</span> <span class="p">],</span> <span class="p">[</span><span class="s1">&#39;#111111&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+          <span class="nx">radial</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nx">origin</span><span class="o">:</span> <span class="nx">centerRing</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">topCenter</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">],</span>
+      <span class="nx">destination</span><span class="o">:</span> <span class="nx">centerRing</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">rightCenter</span>
+  <span class="p">};</span>
+
+  <span class="kd">var</span> <span class="nx">center</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
+    <span class="nx">center</span><span class="o">:</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">,</span>
+    <span class="nx">radius</span><span class="o">:</span> <span class="nx">wooferSize</span> <span class="o">/</span> <span class="mf">3.2</span>
+  <span class="p">});</span>
+
+  <span class="nx">center</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="p">{</span>
+      <span class="nx">gradient</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">stops</span><span class="o">:</span> <span class="p">[[</span><span class="s1">&#39;#aaaaaa&#39;</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;#3f3f3f&#39;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;#222222&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span>
+          <span class="nx">radial</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nx">origin</span><span class="o">:</span> <span class="nx">center</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">topCenter</span> <span class="o">+</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="nx">wooferSize</span> <span class="o">*</span> <span class="mf">0.1</span><span class="p">],</span>
+      <span class="nx">destination</span><span class="o">:</span> <span class="nx">center</span><span class="p">.</span><span class="nx">bounds</span><span class="p">.</span><span class="nx">rightCenter</span>
+  <span class="p">};</span>
+
+  <span class="c1">// Build the woofer group</span>
+  <span class="kd">var</span> <span class="nx">woofer</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Group</span><span class="p">(</span><span class="nx">cone</span><span class="p">,</span> <span class="nx">centerRing</span><span class="p">,</span> <span class="nx">center</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">wooferBounds</span> <span class="o">=</span> <span class="nx">woofer</span><span class="p">.</span><span class="nx">bounds</span><span class="p">;</span>
+  <span class="kd">var</span> <span class="nx">frameCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+  <span class="kd">function</span> <span class="nx">onFrame</span><span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// 60 fps, so hit a bass note every 2/3 of a</span>
+    <span class="c1">// second or 90 bpm</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">frameCount</span><span class="o">++</span> <span class="o">==</span> <span class="mi">40</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">woofer</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="mf">1.04</span><span class="p">);</span>
+      <span class="nx">frameCount</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">count</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">woofer</span><span class="p">.</span><span class="nx">fitBounds</span><span class="p">(</span><span class="nx">wooferBounds</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">woofer</span><span class="p">.</span><span class="nx">scale</span><span class="p">(</span><span class="mf">1.02</span><span class="p">,</span> <span class="nx">woofer</span><span class="p">.</span><span class="nx">center</span><span class="p">);</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="o">&lt;</span><span class="err">/script&gt;</span>
+
+<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0011&quot;</span> <span class="nx">height</span><span class="o">=</span><span class="s2">&quot;250&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
+    </div>
+  </div>
+
+  <div class="post">
     <script type="text/paperscript" canvas="canvas-0010">
   var i = 1;
   var color = 'dark';
@@ -798,99 +955,6 @@
     </div>
   </div>
 
-  <div class="post">
-    <script type="text/paperscript" canvas="canvas-0001">
-  var raster = new Raster('/pixelbits/assets/starry-night.jpg');
-
-  // Hide the original image
-  raster.visible = false;
-
-  var gridSize = 13;
-
-  // Space the cells by 120%:
-  var spacing = 1.2;
-
-  // As the web is asynchronous, we need to wait for the raster to load
-  // before we can perform any operation on its pixels.
-  raster.on('load', function() {
-    // Resize image to a manageable size
-    raster.size = new Size(50, 32);
-
-    for (var y = 0; y < raster.height; y++) {
-      for(var x = 0; x < raster.width; x++) {
-        // Get the color of the pixel:
-        var color = raster.getPixel(x, y);
-
-        // Create a circle shaped path:
-        var path = new Path.Circle({
-          center: new Point(x, y) * gridSize,
-          radius: gridSize / 2 / spacing
-        });
-
-        // Set the fill color of the path to the color
-        // of the pixel:
-        path.fillColor = color;
-      }
-    }
-  });
-
-  // Move the active layer to the center of the view:
-  project.activeLayer.position = view.center;
-
-</script>
-
-<canvas id="canvas-0001"></canvas>
-
-    <a href="/pixelbits/2014/09/27/raster-circles.html" class="post-date">27 Sep 2014</a>
-    <p class="post-description">
-      Getting colors from raster image. Basically copied from the Paper.js Mona Lisa example. <a href="#" class="js-show-code">Show code</a>
-    </p>
-
-    <div class="code">
-      <div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/paperscript&quot;</span> <span class="nx">canvas</span><span class="o">=</span><span class="s2">&quot;canvas-0001&quot;</span><span class="o">&gt;</span>
-  <span class="kd">var</span> <span class="nx">raster</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Raster</span><span class="p">(</span><span class="s1">&#39;/pixelbits/assets/starry-night.jpg&#39;</span><span class="p">);</span>
-
-  <span class="c1">// Hide the original image</span>
-  <span class="nx">raster</span><span class="p">.</span><span class="nx">visible</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
-
-  <span class="kd">var</span> <span class="nx">gridSize</span> <span class="o">=</span> <span class="mi">13</span><span class="p">;</span>
-
-  <span class="c1">// Space the cells by 120%:</span>
-  <span class="kd">var</span> <span class="nx">spacing</span> <span class="o">=</span> <span class="mf">1.2</span><span class="p">;</span>
-
-  <span class="c1">// As the web is asynchronous, we need to wait for the raster to load</span>
-  <span class="c1">// before we can perform any operation on its pixels.</span>
-  <span class="nx">raster</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;load&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="c1">// Resize image to a manageable size</span>
-    <span class="nx">raster</span><span class="p">.</span><span class="nx">size</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Size</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">32</span><span class="p">);</span>
-
-    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">raster</span><span class="p">.</span><span class="nx">height</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-      <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">raster</span><span class="p">.</span><span class="nx">width</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// Get the color of the pixel:</span>
-        <span class="kd">var</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">raster</span><span class="p">.</span><span class="nx">getPixel</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
-
-        <span class="c1">// Create a circle shaped path:</span>
-        <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Path</span><span class="p">.</span><span class="nx">Circle</span><span class="p">({</span>
-          <span class="nx">center</span><span class="o">:</span> <span class="k">new</span> <span class="nx">Point</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">*</span> <span class="nx">gridSize</span><span class="p">,</span>
-          <span class="nx">radius</span><span class="o">:</span> <span class="nx">gridSize</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">/</span> <span class="nx">spacing</span>
-        <span class="p">});</span>
-
-        <span class="c1">// Set the fill color of the path to the color</span>
-        <span class="c1">// of the pixel:</span>
-        <span class="nx">path</span><span class="p">.</span><span class="nx">fillColor</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
-      <span class="p">}</span>
-    <span class="p">}</span>
-  <span class="p">});</span>
-
-  <span class="c1">// Move the active layer to the center of the view:</span>
-  <span class="nx">project</span><span class="p">.</span><span class="nx">activeLayer</span><span class="p">.</span><span class="nx">position</span> <span class="o">=</span> <span class="nx">view</span><span class="p">.</span><span class="nx">center</span><span class="p">;</span>
-
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
-
-<span class="o">&lt;</span><span class="nx">canvas</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;canvas-0001&quot;</span><span class="o">&gt;&lt;</span><span class="err">/canvas&gt;</span></code></pre></div>
-    </div>
-  </div>
-
 
 
 <div class="pagination">
@@ -907,9 +971,13 @@
       <strong>2</strong>
     
   
+    
+      <a href="/pixelbits/page3">3</a>
+    
+  
 
   
-    <span class="paginate-disabled">Next &raquo;</span>
+    <a href="/pixelbits/page3">Next &raquo;</a>
   
 </div>
 
